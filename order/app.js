@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var path = require("path");
 var port = 3000;
+var mydbClass = require("./model/mydb.js");
+var mydb = new mydbClass();
 
 //route//////////////////////////////////////////////////////////////////
 app.get('/', function (req, res) {
@@ -30,4 +32,9 @@ app.use(express.static('public'));
 
 app.listen(port, function () {
     console.log('Server listening on port '+port+" "+new Date());
+
+    mydb.findAll("test",function(result){
+        console.log(result);
+    });
+
 });
