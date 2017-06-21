@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <script src="static/jquery/jquery.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/angular/angular.min.js"></script>
+    <script src="static/angular/app.js"></script>
+</head>
+<body ng-app="adminApp" ng-controller="adminCtrl">
+
+<div class="container-fluid">
+    <h1>admin</h1>
+    <div class="row">
+        <div class="col-sm-10" style="background-color:lavender;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>number</th>
+                        <th>name</th>
+                        <th>price</th>
+                        <th>descript</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" ng-model="number"></td>
+                        <td><input type="text" ng-model="name"></td>
+                        <td><input type="text" ng-model="price"></td>
+                        <td><input type="text" ng-model="descript"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" ng-click="saveBtn()">save</button>
+        </div>
+    </div>
+
+    <h1>menu list</h1>
+    <div class="row">
+        <div class="col-sm-10" style="background-color:yellow;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>number</th>
+                        <th>name</th>
+                        <th>price</th>
+                        <th>descript</th>
+                        <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">Delall</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in dbresult">
+                        <td><input type="text" class="form-control" ng-model="x.number"></td>
+                        <td><input type="text" class="form-control" ng-model="x.name"></td>
+                        <td><input type="text" class="form-control" ng-model="x.price"></td>
+                        <td><input type="text" class="form-control" ng-model="x.descript"></td>
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="delOneDb(x)">Del</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="modifyOneDb(x)">Modify</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
