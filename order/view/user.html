@@ -1,5 +1,42 @@
-<html>
-    <body>
-        index
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <script src="static/jquery/jquery.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/angular/angular.min.js"></script>
+    <script src="static/angular/utils.js"></script>
+    <script src="static/angular/userApp.js"></script>
+</head>
+<body ng-app="userApp" ng-controller="userCtrl">
+
+<div class="container-fluid">
+    <h1>user</h1>
+    <div class="row">
+        <div class="col-sm-10" style="background-color:lavender;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>price</th>
+                        <th>count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in dbresult">
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.price }}</td>
+                        <td><input type="text" class="form-control" ng-model="x.count"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" ng-click="sendOrder()">Send Order</button>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>

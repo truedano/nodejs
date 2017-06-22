@@ -8,12 +8,15 @@
     <script src="static/jquery/jquery.min.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/angular/angular.min.js"></script>
+    <script src="static/angular/utils.js"></script>
     <script src="static/angular/adminApp.js"></script>
 </head>
 <body ng-app="adminApp" ng-controller="adminCtrl">
 
 <div class="container-fluid">
     <h1>admin</h1>
+
+    <h3>menu list</h3>
     <div class="row">
         <div class="col-sm-10" style="background-color:lavender;">
             <table class="table table-striped">
@@ -35,12 +38,6 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn-primary" ng-click="saveBtn()">save</button>
-        </div>
-    </div>
-
-    <h1>menu list</h1>
-    <div class="row">
-        <div class="col-sm-10" style="background-color:yellow;">
             <table class="table">
                 <thead>
                     <tr>
@@ -68,6 +65,16 @@
             </table>
         </div>
     </div>
+
+    <h3>Others</h3>
+    <div class="row">
+        <div class="col-sm-10" style="background-color:yellow;">
+            <div class="col-sm-2">table counts</div>
+            <div class="col-sm-2"><input type="text" class="form-control" ng-model="tableCounts"></div>
+            <div class="col-sm-2"><button type="button" class="btn btn-primary" ng-click="saveTableCounts('tableCounts',tableCounts)">Save</button></div>
+        </div>
+    </div>
+    
 </div>
 
 </body>

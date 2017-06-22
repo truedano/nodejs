@@ -2,9 +2,9 @@ var app = angular.module('adminApp', []);
 
 app.controller('adminCtrl', function($scope, $http) {
     $scope.saveBtn = function(){
-        $http({
+        var dataobj = {
             method: 'POST',
-            url: '/admin',
+            url: '/mydb?dbname=menu&type=insertone',
             data: {
                 number:$scope.number,
                 name:$scope.name,
@@ -12,63 +12,81 @@ app.controller('adminCtrl', function($scope, $http) {
                 descript:$scope.descript,
                 time: new Date()
             }
-        }).then(function mySuccess(response){
-            console.log("success");
-            getDb("menu","all");
+        };
+        $http(dataobj).then(function(response){
+            getDb($http,"menu","all",function(result){
+                $scope.dbresult = result;
+                console.log(dataobj.method,dataobj.url,"success");
+            });
         },function myError(response){
-            console.log("error");
+            console.log(dataobj.method,dataobj.url,"error");
         });
     };
 
-    var getDb = function(dbname,type){
-        $http({
-            method: 'GET',
-            url: '/mydb?dbname='+dbname+'&type='+type
-        }).then(function mySuccess(response){
-            console.log('Get '+dbname+' success');
-            $scope.dbresult = response.data;
-        },function myError(response){
-            console.log('Get '+dbname+' error');
-        });
-    };
-    getDb("menu","all");
+    getDb($http,"menu","all",function(result){
+        $scope.dbresult = result;
+    });
 
     $scope.delOneDb = function(x){
-        $http({
+        var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=menu&type=delone',
             data: x
-        }).then(function mySuccess(response){
-            console.log("Post db success");
-            getDb("menu","all");
+        };
+        $http(dataobj).then(function (response){
+            getDb($http,"menu","all",function(result){
+                $scope.dbresult = result;
+                console.log(dataobj.method,dataobj.url,"success");
+            });
         },function myError(response){
-            console.log("Post db error");
+            console.log(dataobj.method,dataobj.url,"error");
         });
     };
 
     $scope.delAllDb = function(){
-        $http({
+        var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=menu&type=delall'
-        }).then(function mySuccess(response){
-            console.log("Post db success");
-            getDb("menu","all");
+        };
+        $http(dataobj).then(function(response){
+            getDb($http,"menu","all",function(result){
+                $scope.dbresult = result;
+                console.log(dataobj.method,dataobj.url,"success");
+            });
         },function myError(response){
-            console.log("Post db error");
+            console.log(dataobj.method,dataobj.url,"error");
         });
     };
 
     $scope.modifyOneDb = function(x){
-        console.log("modifyOneDb");
-        $http({
+        var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=menu&type=modifyone',
             data: x
-        }).then(function mySuccess(response){
-            console.log("Post db success");
-            getDb("menu","all");
+        };
+        $http(dataobj).then(function(response){
+            getDb($http,"menu","all",function(result){
+                $scope.dbresult = result;
+                console.log(dataobj.method,dataobj.url,"success");
+            });
         },function myError(response){
-            console.log("Post db error");
+            console.log(dataobj.method,dataobj.url,"error");
         });
     }
+
+    $scope.saveTableCounts = function(name,value){
+        var dataobj = {
+            method: 'POST',
+            url: '/mydb?dbname=others&type=add',
+            data: {
+                name:name,
+                value:value
+            }
+        };
+        $http(dataobj).then(function mySuccess(response){
+            console.log(dataobj.method,dataobj.url,"success");
+        },function myError(response){
+            console.log(dataobj.method,dataobj.url,"error");
+        });
+    };
 });

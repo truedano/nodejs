@@ -12,6 +12,24 @@ module.exports = function(){
         });
     };
 
+    this.findOne = function(tableName,callback){
+        MongoClient.connect(url,function(err,db){
+            db.collection(tableName).findOne({},function(err, result) {
+                callback(err,result);
+                db.close();
+            });
+        });
+    };
+
+    this.findOne = function(tableName,myquery,callback){
+        MongoClient.connect(url,function(err,db){
+            db.collection(tableName).find(myquery).toArray(function(err, result) {
+                callback(err, result);
+                db.close();
+            });
+        });
+    };
+
     this.insert = function(tableName,obj,callback){
         MongoClient.connect(url,function(err,db){
             db.collection(tableName).insertOne(obj,function(err,obj){
