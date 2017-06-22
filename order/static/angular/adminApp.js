@@ -15,17 +15,13 @@ app.controller('adminCtrl', function($scope, $http) {
         };
         $http(dataobj).then(function(response){
             getDb($http,"menu","all",function(result){
-                $scope.dbresult = result;
+                $scope.menuresult = result;
                 console.log(dataobj.method,dataobj.url,"success");
             });
         },function myError(response){
             console.log(dataobj.method,dataobj.url,"error");
         });
     };
-
-    getDb($http,"menu","all",function(result){
-        $scope.dbresult = result;
-    });
 
     $scope.delOneDb = function(x){
         var dataobj = {
@@ -35,7 +31,7 @@ app.controller('adminCtrl', function($scope, $http) {
         };
         $http(dataobj).then(function (response){
             getDb($http,"menu","all",function(result){
-                $scope.dbresult = result;
+                $scope.menuresult = result;
                 console.log(dataobj.method,dataobj.url,"success");
             });
         },function myError(response){
@@ -50,7 +46,7 @@ app.controller('adminCtrl', function($scope, $http) {
         };
         $http(dataobj).then(function(response){
             getDb($http,"menu","all",function(result){
-                $scope.dbresult = result;
+                $scope.menuresult = result;
                 console.log(dataobj.method,dataobj.url,"success");
             });
         },function myError(response){
@@ -66,7 +62,7 @@ app.controller('adminCtrl', function($scope, $http) {
         };
         $http(dataobj).then(function(response){
             getDb($http,"menu","all",function(result){
-                $scope.dbresult = result;
+                $scope.menuresult = result;
                 console.log(dataobj.method,dataobj.url,"success");
             });
         },function myError(response){
@@ -89,4 +85,13 @@ app.controller('adminCtrl', function($scope, $http) {
             console.log(dataobj.method,dataobj.url,"error");
         });
     };
+
+    getDb($http,"menu","all",function(result){
+        $scope.menuresult = result;
+    });
+
+    getDb($http,"others","all",function(result){
+        $scope.tableCounts = getOthersValue(result,'tableCounts');
+    });
+
 });

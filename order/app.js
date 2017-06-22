@@ -117,6 +117,22 @@ app.post("/mydb",function(req, res){
                 res.send(JSON.stringify({success: true}));
             });
         });
+    }else if( dbname == "userorder" ){
+        if( type == "insertone" ){
+            var obj={
+                tablenumber:req.body.tablenumber,
+                order:req.body.order,
+                status:req.body.status,
+                time: req.body.time
+            };
+            mydb.insert(dbname,obj,function(err,obj){
+                res.send(JSON.stringify({success: true}));
+                //mydb.findAll(dbname,function(result){
+                //    console.log(result);
+                //    console.log(result[0].order[0].name);
+                //});
+            });
+        }
     }
     
 });

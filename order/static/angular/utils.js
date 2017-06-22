@@ -9,3 +9,11 @@ var getDb = function(http,dbname,type,callback){
         console.log('Get '+dbname+' error');
     });
 };
+
+var getOthersValue = function(result,name){
+    for(var i=0;i<result.length;i++){
+        if( result[i].name == name ){
+            return result[i].value;
+        }
+    }
+}
