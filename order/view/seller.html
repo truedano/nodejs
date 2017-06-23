@@ -11,6 +11,24 @@
     <script src="static/angular/utils.js"></script>
     <script src="static/angular/sellerApp.js"></script>
 </head>
+<style>
+#time:active {
+    color: #ffffff; 
+    background-color: #161617; 
+    border-color: #494F57;
+}
+#tablenumber:active {
+    color: #ffffff; 
+    background-color: #161617; 
+    border-color: #494F57;
+}
+#status:active {
+    color: #ffffff; 
+    background-color: #161617; 
+    border-color: #494F57;
+}
+</style>
+
 <body ng-app="sellerApp" ng-controller="sellerCtrl">
 
 <div class="container-fluid">
@@ -21,10 +39,10 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>time</th>
-                        <th>tablenumber</th>
+                        <th ng-click="clickSort('time')" id='time'>time</th>
+                        <th ng-click="clickSort('tablenumber')" id='tablenumber'>tablenumber</th>
                         <th>order</th>
-                        <th>status</th>
+                        <th ng-click="clickSort('status')" id='status'>status</th>
                         <th>action</th>
                     </tr>
                 </thead>
