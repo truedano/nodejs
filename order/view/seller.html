@@ -8,6 +8,7 @@
     <script src="static/jquery/jquery.min.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/angular/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="static/angular/utils.js"></script>
     <script src="static/angular/sellerApp.js"></script>
 </head>
@@ -32,7 +33,9 @@
 <body ng-app="sellerApp" ng-controller="sellerCtrl">
 
 <div class="container-fluid">
-    <h1>seller</h1>
+    <div class="page-header">
+        <h1>Seller <small></small></h1>
+    </div>
     <div class="row">
         
         <div class="col-sm-10" style="background-color:lavender;">
@@ -43,6 +46,7 @@
                         <th ng-click="clickSort('tablenumber')" id='tablenumber'>tablenumber</th>
                         <th>order</th>
                         <th ng-click="clickSort('status')" id='status'>status</th>
+                        <th>sum</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -59,6 +63,7 @@
                             </table>
                         </td>
                         <td>{{ x.status }}</td>
+                        <td>{{ x.sum }}</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary" ng-click="completeOrder(x)">complete</button>

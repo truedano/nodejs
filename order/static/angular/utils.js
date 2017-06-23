@@ -29,3 +29,13 @@ var getOthersValue = function(result,name){
         }
     }
 }
+
+var resultSum = function(result){
+    for(var i=0;i<result.length;i++){
+        var sum =0;
+        for(var j=0;j<result[i].order.length;j++){
+            sum += parseInt(result[i].order[j].price)*parseInt(result[i].order[j].count);
+            result[i].sum = sum;
+        }
+    }
+};

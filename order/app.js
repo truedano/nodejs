@@ -5,6 +5,10 @@ var port = 3000;
 var mydbClass = require("./model/mydb.js");
 var mydb = new mydbClass();
 var bodyParser = require("body-parser");
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var utilsClass = require("./model/utils.js");
+var utils = new utilsClass();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -18,20 +22,12 @@ app.get('/user',function(req, res){
     res.sendFile(path.join(__dirname+'/view/user.html'));
 });
 
-app.post('/user',function(req, res){
-    console.log("post to user");
-});
-
 app.get('/check_user', function (req, res) {
     res.send(JSON.stringify({success: true}));
 });
 
 app.get('/seller',function(req, res){
     res.sendFile(path.join(__dirname+'/view/seller.html'));
-});
-
-app.post('/seller',function(req, res){
-    console.log("post to seller");
 });
 
 app.get('/check_seller', function (req, res) {
@@ -105,7 +101,7 @@ app.post("/mydb",function(req, res){
                 name:req.body.name,
                 price:req.body.price,
                 descript:req.body.descript,
-                time: req.body.time
+                time: utils.formatTime()
             };
             mydb.insert("menu",obj,function(err,obj){
                 res.send(JSON.stringify({success: true}));
@@ -127,9 +123,10 @@ app.post("/mydb",function(req, res){
                 tablenumber:req.body.tablenumber,
                 order:req.body.order,
                 status:req.body.status,
-                time: req.body.time
+                time: utils.formatTime()
             };
             mydb.insert(dbname,obj,function(err,obj){
+                io.emit("userorder_insertone","userorder_insertone");
                 res.send(JSON.stringify({success: true}));
             });
         }else if( type == "modifyone" ){
@@ -163,11 +160,14 @@ app.post("/mydb",function(req, res){
 
 //static/////////////////////////////////////////////////////////////////
 app.use('/static', express.static(__dirname + '/static'));
+//static/////////////////////////////////////////////////////////////////
 
-app.listen(port, function () {
+//socket.io//////////////////////////////////////////////////////////////
+io.on('connect',function(){
+    console.log('connect');
+});
+//socket.io//////////////////////////////////////////////////////////////
+
+server.listen(port, function () {
     console.log('Server listening on port '+port+" "+new Date());
-
-    //mydb.findAll("menu",function(result){
-    //    console.log(result);
-    //});
 });

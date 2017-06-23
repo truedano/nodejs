@@ -5,7 +5,7 @@ app.controller('userCtrl', function($scope, $http) {
         var tmporder = [];
         for(var i=0;i<$scope.menuresult.length;i++){
             try {
-                if( $scope.menuresult[i].count ){
+                if( parseInt($scope.menuresult[i].count) > 0 ){
                     var obj = {
                         name:$scope.menuresult[i].name,
                         price:$scope.menuresult[i].price,
@@ -23,8 +23,7 @@ app.controller('userCtrl', function($scope, $http) {
             data: {
                 tablenumber:$scope.tablenumber,
                 order:tmporder,
-                status:0,
-                time: new Date()
+                status:0
             }
         };
         $http(dataobj).then(function(response){
