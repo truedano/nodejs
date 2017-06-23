@@ -65,4 +65,13 @@ module.exports = function(){
             });
         });
     };
+
+    this.findAllSort = function(tableName,sortTarget,sortType,callback){
+        MongoClient.connect(url,function(err,db){
+            db.collection(tableName).find({}).sort([[sortTarget, sortType]]).toArray(function(err, result) {
+                callback(result);
+                db.close();
+            });
+        });
+    };
 }

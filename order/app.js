@@ -55,8 +55,12 @@ app.get("/mydb",function(req, res){
         mydb.findAll(dbname,function(result){
             res.send(JSON.stringify(result));
         });
-    }else if( type == "one" ){
-
+    }else if( type == "allsort" ){
+        var sortTarget = req.query.sortTarget;
+        var sortType = req.query.sortType;
+        mydb.findAllSort(dbname,sortTarget,parseInt(sortType),function(result){
+            res.send(JSON.stringify(result));
+        });
     }
 });
 
@@ -127,10 +131,29 @@ app.post("/mydb",function(req, res){
             };
             mydb.insert(dbname,obj,function(err,obj){
                 res.send(JSON.stringify({success: true}));
-                //mydb.findAll(dbname,function(result){
-                //    console.log(result);
-                //    console.log(result[0].order[0].name);
-                //});
+            });
+        }else if( type == "modifyone" ){
+            var myquery = {
+                time: req.body.time
+            };
+            var newvalues = {
+                tablenumber:req.body.tablenumber,
+                order:req.body.order,
+                status:parseInt(req.body.status,10) == 0?1:0,
+                time: req.body.time
+            };
+            mydb.update(dbname,myquery,newvalues,function(err, obj){
+                res.send(JSON.stringify({success: true}));
+            });
+        }else if( type == "delone" ){
+            var myquery = {
+                tablenumber:req.body.tablenumber,
+                order:req.body.order,
+                status:req.body.status,
+                time: req.body.time
+            };
+            mydb.remove(dbname,myquery,function(err, obj){
+                res.send(JSON.stringify({success: true}));
             });
         }
     }

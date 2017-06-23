@@ -1,5 +1,58 @@
-<html>
-    <body>
-        index
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>seller</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <script src="static/jquery/jquery.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/angular/angular.min.js"></script>
+    <script src="static/angular/utils.js"></script>
+    <script src="static/angular/sellerApp.js"></script>
+</head>
+<body ng-app="sellerApp" ng-controller="sellerCtrl">
+
+<div class="container-fluid">
+    <h1>seller</h1>
+    <div class="row">
+        
+        <div class="col-sm-10" style="background-color:lavender;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>time</th>
+                        <th>tablenumber</th>
+                        <th>order</th>
+                        <th>status</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in userorderresult">
+                        <td>{{ x.time }}</td>
+                        <td>{{ x.tablenumber }}</td>
+                        <td>
+                            <table>
+                                <tr ng-repeat="y in x.order">
+                                    <td>{{ y.name }}</td>
+                                    <td>{{ y.price }} X {{ y.count }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>{{ x.status }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary" ng-click="completeOrder(x)">complete</button>
+                                <button type="button" class="btn btn-primary" ng-click="deleteOrder(x)">delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
