@@ -2,7 +2,7 @@ var getDb = function(http,dbname,type,callback){
     http({
         method: 'GET',
         url: '/mydb?dbname='+dbname+'&type='+type
-    }).then(function mySuccess(response){
+    }).then(function(response){
         console.log('Get '+dbname+' success');
         callback(response.data);
     },function myError(response){
@@ -10,14 +10,14 @@ var getDb = function(http,dbname,type,callback){
     });
 };
 
-var getDb = function(http,dbname,type,sortTarget,sortType,callback){
+var getDbSort = function(http,dbname,type,sortTarget,sortType,callback){
     http({
         method: 'GET',
         url: '/mydb?dbname='+dbname+'&type='+type+"&sortTarget="+sortTarget+"&sortType="+sortType
-    }).then(function mySuccess(response){
+    }).then(function(response){
         console.log('Get '+dbname+' success');
         callback(response.data);
-    },function myError(response){
+    },function(response){
         console.log('Get '+dbname+' error');
     });
 };

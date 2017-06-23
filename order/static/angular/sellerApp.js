@@ -10,7 +10,7 @@ app.controller('sellerCtrl', function($scope, $http) {
             data: x
         };
         $http(dataobj).then(function(response){
-            getDb($http,"userorder","allsort","time",sortType,function(result){
+            getDbSort($http,"userorder","allsort","time",sortType,function(result){
                 $scope.userorderresult = result;
             });
             console.log(dataobj.method,dataobj.url,"success");
@@ -26,7 +26,7 @@ app.controller('sellerCtrl', function($scope, $http) {
             data: x
         };
         $http(dataobj).then(function(response){
-            getDb($http,"userorder","allsort","time",sortType,function(result){
+            getDbSort($http,"userorder","allsort","time",sortType,function(result){
                 $scope.userorderresult = result;
             });
             console.log(dataobj.method,dataobj.url,"success");
@@ -37,12 +37,12 @@ app.controller('sellerCtrl', function($scope, $http) {
 
     $scope.clickSort = function(sortTarget){
         sortType == -1?sortType = 1:sortType = -1;
-        getDb($http,"userorder","allsort",sortTarget,sortType,function(result){
+        getDbSort($http,"userorder","allsort",sortTarget,sortType,function(result){
             $scope.userorderresult = result;
         });
     };
 
-    getDb($http,"userorder","allsort","time",sortType,function(result){
+    getDbSort($http,"userorder","allsort","time",sortType,function(result){
         $scope.userorderresult = result;
     });
 
