@@ -54,8 +54,10 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
     socket.on('connect', function(data) {
 
     });
-    socket.on('userorder_insertone',function(result){
-        $scope.userorderresult = result;
-        resultSum($scope.userorderresult);
+    socket.on('userorder_insertone',function(){
+        getDbSort($http,"userorder","allsort","time",sortType,function(result){
+            $scope.userorderresult = result;
+            resultSum($scope.userorderresult);
+        });
     });
 });

@@ -28,7 +28,7 @@ var getOthersValue = function(result,name){
             return result[i].value;
         }
     }
-}
+};
 
 var resultSum = function(result){
     for(var i=0;i<result.length;i++){
