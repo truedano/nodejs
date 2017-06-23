@@ -126,8 +126,9 @@ app.post("/mydb",function(req, res){
                 time: utils.formatTime()
             };
             mydb.insert(dbname,obj,function(err,obj){
-                io.emit("userorder_insertone","userorder_insertone");
-                res.send(JSON.stringify({success: true}));
+                mydb.findAllSort("userorder","time",-1,function(result){
+                    io.emit("userorder_insertone",result);
+                });
             });
         }else if( type == "modifyone" ){
             var myquery = {
