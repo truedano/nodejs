@@ -43,6 +43,6 @@ var resultSum = function(result){
 var formatTime = function(result){
     for(var i=0;i<result.length;i++){
         var d = new Date(result[i].time);
-        result[i].time = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+d.getMilliseconds();
+        result[i].formatTime = d.getMonth()+1+"/"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+d.getMilliseconds();
     }
 }

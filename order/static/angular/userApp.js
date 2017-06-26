@@ -23,7 +23,8 @@ app.controller('userCtrl', function($scope, $http) {
             data: {
                 tablenumber:$scope.tablenumber,
                 order:tmporder,
-                status:0
+                status:0,
+                time:new Date()
             }
         };
         $http(dataobj).then(function(response){

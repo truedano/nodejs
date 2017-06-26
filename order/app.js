@@ -101,7 +101,7 @@ app.post("/mydb",function(req, res){
                 name:req.body.name,
                 price:req.body.price,
                 descript:req.body.descript,
-                time : new Date()
+                time : req.body.time
             };
             mydb.insert("menu",obj,function(err,obj){
                 res.send(JSON.stringify({success: true}));
@@ -123,7 +123,7 @@ app.post("/mydb",function(req, res){
                 tablenumber:req.body.tablenumber,
                 order:req.body.order,
                 status:req.body.status,
-                time : new Date()
+                time : req.body.time
             };
             mydb.insert(dbname,obj,function(err,obj){
                 io.emit("userorder_insertone","userorder_insertone");

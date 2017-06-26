@@ -70,11 +70,17 @@
 
     <h3>Others</h3>
     <div class="row">
-        <div class="col-sm-10" style="background-color:yellow;">
-            <div class="col-sm-2">table counts</div>
-            <div class="col-sm-2"><input type="text" class="form-control" ng-model="tableCounts"></div>
-            <div class="col-sm-2"><button type="button" class="btn btn-primary" ng-click="saveTableCounts('tableCounts',tableCounts)">Save</button></div>
-        </div>
+        <div class="col-sm-10" style="background-color:lavender;">
+            <table class="table">
+                <tr>
+                    <td>table counts</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="tableCounts">
+                    </td>
+                </tr>
+            <table>
+            <button type="button" class="btn btn-primary" ng-click="saveTableCounts('tableCounts',tableCounts)">Save</button>
+        <div>
     </div>
     
 </div>
