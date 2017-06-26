@@ -10,7 +10,7 @@ var getDb = function(http,dbname,type,callback){
     });
 };
 
-var getDbSort = function(http,dbname,type,sortTarget,sortType,callback){
+var getDbSortToday = function(http,dbname,type,sortTarget,sortType,callback){
     http({
         method: 'GET',
         url: '/mydb?dbname='+dbname+'&type='+type+"&sortTarget="+sortTarget+"&sortType="+sortType
@@ -40,9 +40,7 @@ var resultSum = function(result){
     }
 };
 
-var formatTime = function(result){
-    for(var i=0;i<result.length;i++){
-        var d = new Date(result[i].time);
-        result[i].formatTime = d.getMonth()+1+"/"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+d.getMilliseconds();
-    }
-}
+var formatTime = function(){
+    var d = new Date();
+    return d.getMonth()+1+"/"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+d.getMilliseconds();
+};

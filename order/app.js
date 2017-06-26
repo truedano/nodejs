@@ -57,6 +57,12 @@ app.get("/mydb",function(req, res){
         mydb.findAllSort(dbname,sortTarget,parseInt(sortType),function(result){
             res.send(JSON.stringify(result));
         });
+    }else if( type == "allsorttoday" ){
+        var sortTarget = req.query.sortTarget;
+        var sortType = req.query.sortType;
+        mydb.findAllSortToday(dbname,sortTarget,parseInt(sortType),function(result){
+            res.send(JSON.stringify(result));
+        });
     }
 });
 
@@ -101,7 +107,12 @@ app.post("/mydb",function(req, res){
                 name:req.body.name,
                 price:req.body.price,
                 descript:req.body.descript,
-                time : req.body.time
+                time : req.body.time,
+                ftime : req.body.ftime,
+                month : req.body.month,
+                day : req.body.day,
+                hour : req.body.hour,
+                minute : req.body.minute
             };
             mydb.insert("menu",obj,function(err,obj){
                 res.send(JSON.stringify({success: true}));
@@ -123,7 +134,13 @@ app.post("/mydb",function(req, res){
                 tablenumber:req.body.tablenumber,
                 order:req.body.order,
                 status:req.body.status,
-                time : req.body.time
+                time : req.body.time,
+                ftime : req.body.ftime,
+                year : req.body.year,
+                month : req.body.month,
+                day : req.body.day,
+                hour : req.body.hour,
+                minute : req.body.minute
             };
             mydb.insert(dbname,obj,function(err,obj){
                 io.emit("userorder_insertone","userorder_insertone");

@@ -24,7 +24,13 @@ app.controller('userCtrl', function($scope, $http) {
                 tablenumber:$scope.tablenumber,
                 order:tmporder,
                 status:0,
-                time:new Date()
+                time:new Date(),
+                ftime:formatTime(),
+                year : new Date().getFullYear(),
+                month : new Date().getMonth()+1,
+                day : new Date().getDay(),
+                hour : new Date().getHours(),
+                minute : new Date().getMinutes()
             }
         };
         $http(dataobj).then(function(response){

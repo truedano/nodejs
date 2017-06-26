@@ -74,4 +74,17 @@ module.exports = function(){
             });
         });
     };
+
+    this.findAllSortToday = function(tableName,sortTarget,sortType,callback){
+        var myquery = {
+            month: new Date().getMonth()+1,
+            day: new Date().getDay()
+        };
+        MongoClient.connect(url,function(err,db){
+            db.collection(tableName).find(myquery).sort([[sortTarget, sortType]]).toArray(function(err, result) {
+                callback(result);
+                db.close();
+            });
+        });
+    };
 }
