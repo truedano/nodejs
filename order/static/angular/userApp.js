@@ -17,20 +17,14 @@ app.controller('userCtrl', function($scope, $http) {
                 
             }
         }
+        var d = new Date();
         var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=userorder&type=insertone',
             data: {
                 tablenumber:$scope.tablenumber,
                 order:tmporder,
-                status:0,
-                time:new Date(),
-                ftime:formatTime(),
-                year : new Date().getFullYear(),
-                month : new Date().getMonth()+1,
-                day : new Date().getDay(),
-                hour : new Date().getHours(),
-                minute : new Date().getMinutes()
+                status:0
             }
         };
         $http(dataobj).then(function(response){

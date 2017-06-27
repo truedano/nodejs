@@ -9,8 +9,7 @@ app.controller('adminCtrl', function($scope, $http) {
                 number:$scope.number,
                 name:$scope.name,
                 price:$scope.price,
-                descript:$scope.descript,
-                time: new Date()
+                descript:$scope.descript
             }
         };
         $http(dataobj).then(function(response){
@@ -70,7 +69,7 @@ app.controller('adminCtrl', function($scope, $http) {
         });
     }
 
-    $scope.saveOthers = function(name,value){
+    $scope.saveOthers = function(){
         var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=others',
@@ -80,8 +79,7 @@ app.controller('adminCtrl', function($scope, $http) {
                 {name:'businessStartMinute',value:$scope.businessStartMinute},
                 {name:'businessEndHour',value:$scope.businessEndHour},
                 {name:'businessEndMinute',value:$scope.businessEndMinute}
-            ],
-            time:new Date()
+            ]
         };
         $http(dataobj).then(function(response){
             console.log(dataobj.method,dataobj.url,"success");

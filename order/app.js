@@ -102,17 +102,19 @@ app.post("/mydb",function(req, res){
                 res.send(JSON.stringify({success: true}));
             });
         }else if( type == "insertone" ){
+            var d = new Date();
             var obj={
                 number:req.body.number,
                 name:req.body.name,
                 price:req.body.price,
                 descript:req.body.descript,
-                time : req.body.time,
-                ftime : req.body.ftime,
-                month : req.body.month,
-                day : req.body.day,
-                hour : req.body.hour,
-                minute : req.body.minute
+                time : d.toISOString(),
+                ftime:utils.formatTime(d),
+                year : d.getFullYear(),
+                month : d.getMonth()+1,
+                day : d.getDay(),
+                hour : d.getHours(),
+                minute : d.getMinutes()
             };
             mydb.insert("menu",obj,function(err,obj){
                 res.send(JSON.stringify({success: true}));
@@ -127,17 +129,18 @@ app.post("/mydb",function(req, res){
         });
     }else if( dbname == "userorder" ){
         if( type == "insertone" ){
+            var d = new Date();
             var obj={
                 tablenumber:req.body.tablenumber,
                 order:req.body.order,
                 status:req.body.status,
-                time : req.body.time,
-                ftime : req.body.ftime,
-                year : req.body.year,
-                month : req.body.month,
-                day : req.body.day,
-                hour : req.body.hour,
-                minute : req.body.minute
+                time : d.toISOString(),
+                ftime:utils.formatTime(d),
+                year : d.getFullYear(),
+                month : d.getMonth()+1,
+                day : d.getDay(),
+                hour : d.getHours(),
+                minute : d.getMinutes()
             };
             mydb.insert(dbname,obj,function(err,obj){
                 io.emit("userorder_insertone","userorder_insertone");
@@ -145,23 +148,26 @@ app.post("/mydb",function(req, res){
             });
         }else if( type == "modifyone" ){
             var myquery = {
-                time: req.body.time
+                ftime: req.body.ftime
             };
             var newvalues = {
                 tablenumber:req.body.tablenumber,
                 order:req.body.order,
                 status:parseInt(req.body.status,10) == 0?1:0,
-                time: req.body.time
+                time : req.body.time,
+                ftime: req.body.ftime,
+                year : req.body.year,
+                month : req.body.month,
+                day : req.body.day,
+                hour : req.body.hour,
+                minute : req.body.minute
             };
             mydb.update(dbname,myquery,newvalues,function(err, obj){
                 res.send(JSON.stringify({success: true}));
             });
         }else if( type == "delone" ){
             var myquery = {
-                tablenumber:req.body.tablenumber,
-                order:req.body.order,
-                status:req.body.status,
-                time: req.body.time
+                ftime: req.body.ftime
             };
             mydb.remove(dbname,myquery,function(err, obj){
                 res.send(JSON.stringify({success: true}));

@@ -40,7 +40,6 @@ var resultSum = function(result){
     }
 };
 
-var formatTime = function(){
-    var d = new Date();
+var formatTime = function(d){
     return d.getMonth()+1+"/"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+d.getMilliseconds();
 };
