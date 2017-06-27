@@ -49,7 +49,7 @@ app.controller('adminCtrl', function($scope, $http) {
                 $scope.menuresult = result;
                 console.log(dataobj.method,dataobj.url,"success");
             });
-        },function myError(response){
+        },function(response){
             console.log(dataobj.method,dataobj.url,"error");
         });
     };
@@ -65,7 +65,7 @@ app.controller('adminCtrl', function($scope, $http) {
                 $scope.menuresult = result;
                 console.log(dataobj.method,dataobj.url,"success");
             });
-        },function myError(response){
+        },function(response){
             console.log(dataobj.method,dataobj.url,"error");
         });
     }
@@ -73,7 +73,7 @@ app.controller('adminCtrl', function($scope, $http) {
     $scope.saveOthers = function(name,value){
         var dataobj = {
             method: 'POST',
-            url: '/mydb?dbname=others&type=add',
+            url: '/mydb?dbname=others',
             data: [
                 {name:'tableCounts',value:$scope.tableCounts},
                 {name:'businessStartHour',value:$scope.businessStartHour},
@@ -83,9 +83,9 @@ app.controller('adminCtrl', function($scope, $http) {
             ],
             time:new Date()
         };
-        $http(dataobj).then(function mySuccess(response){
+        $http(dataobj).then(function(response){
             console.log(dataobj.method,dataobj.url,"success");
-        },function myError(response){
+        },function(response){
             console.log(dataobj.method,dataobj.url,"error");
         });
     };
