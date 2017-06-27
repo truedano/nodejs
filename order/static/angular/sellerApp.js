@@ -4,6 +4,7 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
     var sortType = -1;
 
     $scope.completeOrder = function(x){
+        (x.status == 0)?x.status = 1:x.status = 0;
         var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=userorder&type=modifyone',
@@ -38,7 +39,6 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
 
     var getDbCallback = function(result){
         $scope.userorderresult = result;
-        resultSum($scope.userorderresult);
     };
 
     getDbSortToday($http,"userorder","allsorttoday","time",sortType,getDbCallback);

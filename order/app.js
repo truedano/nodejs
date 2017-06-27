@@ -142,32 +142,34 @@ app.post("/mydb",function(req, res){
                 hour : d.getHours(),
                 minute : d.getMinutes()
             };
+            utils.resultSum(obj);
             mydb.insert(dbname,obj,function(err,obj){
                 io.emit("userorder_insertone","userorder_insertone");
                 res.send(JSON.stringify({success: true}));
             });
         }else if( type == "modifyone" ){
             var myquery = {
-                ftime: req.body.ftime
+                time: req.body.time
             };
             var newvalues = {
                 tablenumber:req.body.tablenumber,
                 order:req.body.order,
-                status:parseInt(req.body.status,10) == 0?1:0,
+                status:req.body.status,
                 time : req.body.time,
                 ftime: req.body.ftime,
                 year : req.body.year,
                 month : req.body.month,
                 day : req.body.day,
                 hour : req.body.hour,
-                minute : req.body.minute
+                minute : req.body.minute,
+                sum : req.body.sum
             };
             mydb.update(dbname,myquery,newvalues,function(err, obj){
                 res.send(JSON.stringify({success: true}));
             });
         }else if( type == "delone" ){
             var myquery = {
-                ftime: req.body.ftime
+                time: req.body.time
             };
             mydb.remove(dbname,myquery,function(err, obj){
                 res.send(JSON.stringify({success: true}));
