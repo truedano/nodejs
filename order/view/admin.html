@@ -78,6 +78,16 @@
                         <input type="text" class="form-control" ng-model="tableCounts">
                     </td>
                 </tr>
+                <tr>
+                    <td>business time</td>
+                    <td>
+                        <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
+                        <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
+                        --
+                        <input type="number" style="width: 50px" min="0" max="23" ng-model="businessEndHour">:
+                        <input type="number" style="width: 50px" min="0" max="59" ng-model="businessEndMinute">
+                    </td>
+                </tr>
             <table>
             <button type="button" class="btn btn-primary" ng-click="saveOthers()">Save</button>
         <div>

@@ -75,7 +75,11 @@ app.controller('adminCtrl', function($scope, $http) {
             method: 'POST',
             url: '/mydb?dbname=others&type=add',
             data: [
-                {name:'tableCounts',value:$scope.tableCounts}
+                {name:'tableCounts',value:$scope.tableCounts},
+                {name:'businessStartHour',value:$scope.businessStartHour},
+                {name:'businessStartMinute',value:$scope.businessStartMinute},
+                {name:'businessEndHour',value:$scope.businessEndHour},
+                {name:'businessEndMinute',value:$scope.businessEndMinute}
             ],
             time:new Date()
         };
@@ -92,6 +96,10 @@ app.controller('adminCtrl', function($scope, $http) {
 
     getDb($http,"others","all",function(result){
         $scope.tableCounts = getOthersValue(result,'tableCounts');
+        $scope.businessStartHour = getOthersValue(result,'businessStartHour');
+        $scope.businessStartMinute = getOthersValue(result,'businessStartMinute');
+        $scope.businessEndHour = getOthersValue(result,'businessEndHour');
+        $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
     });
 
 });
