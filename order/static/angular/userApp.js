@@ -2,7 +2,32 @@ var app = angular.module('userApp', []);
 
 app.controller('userCtrl', function($scope, $http) {
     $scope.sendOrder = function(){
+        if( typeof $scope.tablenumber == 'undefined' ){
+            bootbox.alert({
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Please choice table number</div>',
+                size : 'small'
+            });
+            return;
+        }
+            
+        var cnterr=0;
+        for(var i=0;i<$scope.menuresult.length;i++){
+            if( typeof $scope.menuresult[i].count == 'undefined' ){
+                cnterr++;
+            }
+        }
+        if( cnterr == $scope.menuresult.length ){
+            bootbox.alert({
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Please choice menu</div>',
+                size : 'small'
+            });
+            return;
+        }
+
         var tmporder = [];
+        var tmpmessage = '';
+        var sum = 0;
+        tmpmessage += "table number : "+$scope.tablenumber+"<br>";
         for(var i=0;i<$scope.menuresult.length;i++){
             try {
                 if( parseInt($scope.menuresult[i].count) > 0 ){
@@ -12,25 +37,44 @@ app.controller('userCtrl', function($scope, $http) {
                         count:$scope.menuresult[i].count
                     };
                     tmporder.push(obj);
+                    tmpmessage += obj.name + " " + obj.price + " X " + obj.count+"<br>";
+                    sum += parseInt(obj.price)*parseInt(obj.count);
                 }
             } catch (error) {
                 
             }
         }
-        var d = new Date();
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=userorder&type=insertone',
-            data: {
-                tablenumber:$scope.tablenumber,
-                order:tmporder,
-                status:0
+        tmpmessage += "sum : "+sum;
+        bootbox.confirm({
+            title: "Re-determined",
+            message: tmpmessage,
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            },
+            callback: function (result) {
+                if( result ){
+                    var d = new Date();
+                    var dataobj = {
+                        method: 'POST',
+                        url: '/mydb?dbname=userorder&type=insertone',
+                        data: {
+                            tablenumber:$scope.tablenumber,
+                            order:tmporder,
+                            status:0
+                        }
+                    };
+                    $http(dataobj).then(function(response){
+                        console.log(dataobj.method,dataobj.url,"success");
+                    },function(response){
+                        console.log(dataobj.method,dataobj.url,"error");
+                    });
+                }
             }
-        };
-        $http(dataobj).then(function(response){
-            console.log(dataobj.method,dataobj.url,"success");
-        },function(response){
-            console.log(dataobj.method,dataobj.url,"error");
         });
     };
 
@@ -45,5 +89,4 @@ app.controller('userCtrl', function($scope, $http) {
             $scope.tableCountsShow.push(i+1);
         }
     });
-
 });
