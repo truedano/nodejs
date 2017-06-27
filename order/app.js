@@ -119,13 +119,10 @@ app.post("/mydb",function(req, res){
             });
         }
     }else if( dbname == "others" ){
-        var myquery = {
-            name : req.body.name
-        };
-        mydb.remove(dbname,myquery,function(err, obj){
-            myquery['value'] = req.body.value;
-            mydb.insert(dbname,myquery,function(err,obj){
-                res.send(JSON.stringify({success: true}));
+        var myarray = req.body;
+        mydb.drop(dbname,function(err, delOK){
+            mydb.insertMultiple(dbname,myarray,function(){
+
             });
         });
     }else if( dbname == "userorder" ){

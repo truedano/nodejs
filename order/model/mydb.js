@@ -12,15 +12,6 @@ module.exports = function(){
         });
     };
 
-    this.findOne = function(tableName,callback){
-        MongoClient.connect(url,function(err,db){
-            db.collection(tableName).findOne({},function(err, result) {
-                callback(err,result);
-                db.close();
-            });
-        });
-    };
-
     this.findOne = function(tableName,myquery,callback){
         MongoClient.connect(url,function(err,db){
             db.collection(tableName).find(myquery).toArray(function(err, result) {
@@ -34,6 +25,15 @@ module.exports = function(){
         MongoClient.connect(url,function(err,db){
             db.collection(tableName).insertOne(obj,function(err,obj){
                 callback(err,obj);
+                db.close();
+            });
+        });
+    };
+
+    this.insertMultiple = function(tableName,myarray,callback){
+        MongoClient.connect(url,function(err,db){
+            db.collection(tableName).insertMany(myarray,function(err,result){
+                callback(err,result);
                 db.close();
             });
         });

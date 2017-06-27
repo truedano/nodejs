@@ -70,14 +70,14 @@ app.controller('adminCtrl', function($scope, $http) {
         });
     }
 
-    $scope.saveTableCounts = function(name,value){
+    $scope.saveOthers = function(name,value){
         var dataobj = {
             method: 'POST',
             url: '/mydb?dbname=others&type=add',
-            data: {
-                name:name,
-                value:value
-            }
+            data: [
+                {name:'tableCounts',value:$scope.tableCounts}
+            ],
+            time:new Date()
         };
         $http(dataobj).then(function mySuccess(response){
             console.log(dataobj.method,dataobj.url,"success");
