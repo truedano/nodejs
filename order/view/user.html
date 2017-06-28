@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         
-        <div class="col-sm-10" style="background-color:lavender;">
+        <div class="col-sm-12" style="background-color:lavender;">
             <div class="col-sm-4">
                 <table class="table">
                     <tr>
@@ -45,7 +45,15 @@
                     <tr ng-repeat="x in menuresult">
                         <td>{{ x.name }}</td>
                         <td>{{ x.price }}</td>
-                        <td><input type="number" ng-model="x.count"></td>
+                        <td>
+                            <input type="number" style="width:60px" min=1 class="form-control" ng-model="x.count">
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-sm" ng-click="addCount(x)">+</button>
+                                <button type="button" class="btn btn-success btn-sm" ng-click="reduceCount(x)">-</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

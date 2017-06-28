@@ -12,7 +12,7 @@ app.controller('userCtrl', function($scope, $http) {
             
         var cnterr=0;
         for(var i=0;i<$scope.menuresult.length;i++){
-            if( typeof $scope.menuresult[i].count == 'undefined' ){
+            if( typeof $scope.menuresult[i].count == 'undefined' || $scope.menuresult[i].count == null ){
                 cnterr++;
             }
         }
@@ -76,6 +76,22 @@ app.controller('userCtrl', function($scope, $http) {
                 }
             }
         });
+    };
+
+    $scope.addCount = function(x){
+        if( typeof x.count == 'undefined' ){
+            x.count=1;
+        }else{
+            x.count++;
+        }
+    };
+
+    $scope.reduceCount = function(x){
+        if( typeof x.count == 'undefined' || x.count == 1 ){
+            x.count=1;
+        }else{
+            x.count--;
+        }
     };
 
     getDb($http,"menu","all",function(result){

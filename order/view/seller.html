@@ -38,7 +38,7 @@
     </div>
     <div class="row">
         <h3>user order</h3>
-        <div class="col-sm-10" style="background-color:lavender;">
+        <div class="col-sm-12" style="background-color:lavender;">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -55,7 +55,7 @@
                         <td>{{ x.ftime }}</td>
                         <td>{{ x.tablenumber }}</td>
                         <td>
-                            <table>
+                            <table class="table">
                                 <tr ng-repeat="y in x.order">
                                     <td>{{ y.name }}</td>
                                     <td>{{ y.price }} X {{ y.count }}</td>
@@ -65,7 +65,7 @@
                         <td>{{ x.status }}</td>
                         <td>{{ x.sum }}</td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group-vertical">
                                 <button type="button" class="btn btn-primary" ng-click="completeOrder(x)">complete</button>
                                 <button type="button" class="btn btn-primary" ng-click="deleteOrder(x)">delete</button>
                             </div>
