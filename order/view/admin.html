@@ -20,7 +20,7 @@
 
     <h3>menu list</h3>
     <div class="row">
-        <div class="col-sm-10" style="background-color:lavender;">
+        <div class="col-sm-12" style="background-color:lavender;">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -31,14 +31,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" ng-model="name"></td>
-                        <td><input type="text" ng-model="price"></td>
-                        <td><input type="text" ng-model="descript"></td>
+                        <td><input type="text" style="width:90px" class="form-control" ng-model="name"></td>
+                        <td><input type="text" style="width:60px" class="form-control" ng-model="price"></td>
+                        <td><input type="text" class="form-control" ng-model="descript"></td>
                     </tr>
                 </tbody>
             </table>
             <button type="button" class="btn btn-primary" ng-click="saveBtn()">save</button>
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>name</th>
@@ -50,13 +50,13 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in menuresult">
-                        <td><input type="text" class="form-control" ng-model="x.name"></td>
-                        <td><input type="text" class="form-control" ng-model="x.price"></td>
+                        <td><input type="text" style="width:90px" class="form-control" ng-model="x.name"></td>
+                        <td><input type="text" style="width:60px" class="form-control" ng-model="x.price"></td>
                         <td><input type="text" class="form-control" ng-model="x.descript"></td>
                         <td>
-                            <div class="btn-group btn-group-vertical">
-                                <button type="button" class="btn btn-success" ng-click="reduceNumber(x.number)">Up</button>
-                                <button type="button" class="btn btn-success" ng-click="addNumber(x.number)">Down</button>
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-success btn-sm" ng-click="reduceNumber(x.number)">▲</button>
+                                <button type="button" class="btn btn-success btn-sm" ng-click="addNumber(x.number)">▼</button>
                             </div>
                         </td>
                         <td>
@@ -73,8 +73,8 @@
 
     <h3>Others</h3>
     <div class="row">
-        <div class="col-sm-10" style="background-color:lavender;">
-            <table class="table">
+        <div class="col-sm-12" style="background-color:lavender;">
+            <table class="table table-hover">
                 <tr>
                     <td>table counts</td>
                     <td>
