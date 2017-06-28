@@ -78,10 +78,6 @@ app.post("/mydb",function(req, res){
             });
         }else if( type == "delone" ){
             var myquery = {
-                number:req.body.number,
-                name:req.body.name,
-                price:req.body.price,
-                descript:req.body.descript,
                 time: req.body.time
             };
             mydb.remove(dbname,myquery,function(err, obj){
