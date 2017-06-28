@@ -24,7 +24,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>number</th>
                         <th>name</th>
                         <th>price</th>
                         <th>descript</th>
@@ -32,7 +31,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" ng-model="number"></td>
                         <td><input type="text" ng-model="name"></td>
                         <td><input type="text" ng-model="price"></td>
                         <td><input type="text" ng-model="descript"></td>
@@ -43,19 +41,24 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>number</th>
                         <th>name</th>
                         <th>price</th>
                         <th>descript</th>
+                        <th>sequence</th>
                         <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">Delall</button></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in menuresult">
-                        <td><input type="text" class="form-control" ng-model="x.number"></td>
                         <td><input type="text" class="form-control" ng-model="x.name"></td>
                         <td><input type="text" class="form-control" ng-model="x.price"></td>
                         <td><input type="text" class="form-control" ng-model="x.descript"></td>
+                        <td>
+                            <div class="btn-group btn-group-vertical">
+                                <button type="button" class="btn btn-success" ng-click="reduceNumber(x.number)">Up</button>
+                                <button type="button" class="btn btn-success" ng-click="addNumber(x.number)">Down</button>
+                            </div>
+                        </td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary" ng-click="delOneDb(x)">Del</button>

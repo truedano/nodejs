@@ -97,6 +97,13 @@ app.post("/mydb",function(req, res){
             mydb.update(dbname,myquery,newvalues,function(err, obj){
                 res.send(JSON.stringify({success: true}));
             });
+        }else if( type == "modifyall" ){
+            var myarray = req.body;
+            mydb.drop(dbname,function(err, delOK){
+                mydb.insertMultiple(dbname,myarray,function(){
+
+                });
+            });
         }else if( type == "insertone" ){
             var d = new Date();
             var obj={

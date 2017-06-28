@@ -6,7 +6,7 @@ app.controller('adminCtrl', function($scope, $http) {
             method: 'POST',
             url: '/mydb?dbname=menu&type=insertone',
             data: {
-                number:$scope.number,
+                number:$scope.menuresult.length,
                 name:$scope.name,
                 price:$scope.price,
                 descript:$scope.descript
@@ -86,6 +86,60 @@ app.controller('adminCtrl', function($scope, $http) {
         },function(response){
             console.log(dataobj.method,dataobj.url,"error");
         });
+    };
+
+    //up button//
+    $scope.reduceNumber = function(number){
+        console.log("reduceNumber :"+number);
+        if( number == 0 ){
+            console.log("Do not move");
+        }else{
+            var tmpobj = $scope.menuresult[number-1];
+            $scope.menuresult[number-1] = $scope.menuresult[number];
+            $scope.menuresult[number] = tmpobj;
+            $scope.menuresult[number-1].number = number-1;
+            $scope.menuresult[number].number = number;
+            var dataobj = {
+                method: 'POST',
+                url: '/mydb?dbname=menu&type=modifyall',
+                data: $scope.menuresult
+            };
+            $http(dataobj).then(function(response){
+                getDb($http,"menu","all",function(result){
+                    $scope.menuresult = result;
+                    console.log(dataobj.method,dataobj.url,"success");
+                });
+            },function(response){
+                console.log(dataobj.method,dataobj.url,"error");
+            });
+        }
+    };
+
+    //dwon button//
+    $scope.addNumber = function(number){
+        console.log("addNumber :"+number);
+        if( number == ($scope.menuresult.length-1) ){
+            console.log("Do not move");
+        }else{
+            var tmpobj = $scope.menuresult[number+1];
+            $scope.menuresult[number+1] = $scope.menuresult[number];
+            $scope.menuresult[number] = tmpobj;
+            $scope.menuresult[number+1].number = number+1;
+            $scope.menuresult[number].number = number;
+            var dataobj = {
+                method: 'POST',
+                url: '/mydb?dbname=menu&type=modifyall',
+                data: $scope.menuresult
+            };
+            $http(dataobj).then(function(response){
+                getDb($http,"menu","all",function(result){
+                    $scope.menuresult = result;
+                    console.log(dataobj.method,dataobj.url,"success");
+                });
+            },function(response){
+                console.log(dataobj.method,dataobj.url,"error");
+            });
+        }
     };
 
     getDb($http,"menu","all",function(result){
