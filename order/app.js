@@ -115,7 +115,7 @@ app.post("/mydb",function(req, res){
                 ftime:utils.formatTime(d),
                 year : d.getFullYear(),
                 month : d.getMonth()+1,
-                day : d.getDay(),
+                date : d.getDate(),
                 hour : d.getHours(),
                 minute : d.getMinutes()
             };
@@ -141,7 +141,7 @@ app.post("/mydb",function(req, res){
                 ftime:utils.formatTime(d),
                 year : d.getFullYear(),
                 month : d.getMonth()+1,
-                day : d.getDay(),
+                date : d.getDate(),
                 hour : d.getHours(),
                 minute : d.getMinutes()
             };
@@ -162,7 +162,7 @@ app.post("/mydb",function(req, res){
                 ftime: req.body.ftime,
                 year : req.body.year,
                 month : req.body.month,
-                day : req.body.day,
+                date : req.body.date,
                 hour : req.body.hour,
                 minute : req.body.minute,
                 sum : req.body.sum

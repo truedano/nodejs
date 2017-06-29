@@ -24,7 +24,7 @@ var setDb = function(http,dbname,type,postdata,callback){
     });
 }
 
-var getDbSortToday = function(http,dbname,type,sortTarget,sortType,callback){
+var getDbSort = function(http,dbname,type,sortTarget,sortType,callback){
     http({
         method: 'GET',
         url: '/mydb?dbname='+dbname+'&type='+type+"&sortTarget="+sortTarget+"&sortType="+sortType

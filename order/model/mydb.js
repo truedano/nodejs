@@ -78,7 +78,7 @@ module.exports = function(){
     this.findAllSortToday = function(tableName,sortTarget,sortType,callback){
         var myquery = {
             month: new Date().getMonth()+1,
-            day: new Date().getDay()
+            date: new Date().getDate()
         };
         MongoClient.connect(url,function(err,db){
             db.collection(tableName).find(myquery).sort([[sortTarget, sortType]]).toArray(function(err, result) {
