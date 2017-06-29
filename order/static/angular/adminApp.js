@@ -2,90 +2,60 @@ var app = angular.module('adminApp', []);
 
 app.controller('adminCtrl', function($scope, $http) {
     $scope.saveBtn = function(){
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=menu&type=insertone',
-            data: {
+        setDb($http,"menu","insertone",
+            {
                 number:$scope.menuresult.length,
                 name:$scope.name,
                 price:$scope.price,
                 descript:$scope.descript
+            },
+            function(){
+                getDb($http,"menu","all",function(result){
+                    $scope.menuresult = result;
+                });
             }
-        };
-        $http(dataobj).then(function(response){
-            getDb($http,"menu","all",function(result){
-                $scope.menuresult = result;
-                console.log(dataobj.method,dataobj.url,"success");
-            });
-        },function myError(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+        );
     };
 
     $scope.delOneDb = function(x){
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=menu&type=delone',
-            data: x
-        };
-        $http(dataobj).then(function (response){
-            getDb($http,"menu","all",function(result){
-                $scope.menuresult = result;
-                console.log(dataobj.method,dataobj.url,"success");
-            });
-        },function myError(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+        setDb($http,"menu","delone",x,function(){
+                getDb($http,"menu","all",function(result){
+                    $scope.menuresult = result;
+                    
+                });
+            }
+        );
     };
 
     $scope.delAllDb = function(){
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=menu&type=delall'
-        };
-        $http(dataobj).then(function(response){
-            getDb($http,"menu","all",function(result){
-                $scope.menuresult = result;
-                console.log(dataobj.method,dataobj.url,"success");
-            });
-        },function(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+        setDb($http,"menu","delall",null,function(){
+                getDb($http,"menu","all",function(result){
+                    $scope.menuresult = result; 
+                });
+            }
+        );
     };
 
     $scope.modifyOneDb = function(x){
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=menu&type=modifyone',
-            data: x
-        };
-        $http(dataobj).then(function(response){
-            getDb($http,"menu","all",function(result){
-                $scope.menuresult = result;
-                console.log(dataobj.method,dataobj.url,"success");
-            });
-        },function(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+        setDb($http,"menu","modifyone",x,function(){
+                getDb($http,"menu","all",function(result){
+                    $scope.menuresult = result;
+                });
+            }
+        );
     }
 
     $scope.saveOthers = function(){
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=others',
-            data: [
+        setDb($http,"others",null,
+            [
                 {name:'tableCounts',value:$scope.tableCounts},
                 {name:'businessStartHour',value:$scope.businessStartHour},
                 {name:'businessStartMinute',value:$scope.businessStartMinute},
                 {name:'businessEndHour',value:$scope.businessEndHour},
                 {name:'businessEndMinute',value:$scope.businessEndMinute}
-            ]
-        };
-        $http(dataobj).then(function(response){
-            console.log(dataobj.method,dataobj.url,"success");
-        },function(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+            ],
+            function(){}
+        );
     };
 
     //up button//
@@ -99,23 +69,17 @@ app.controller('adminCtrl', function($scope, $http) {
             $scope.menuresult[number] = tmpobj;
             $scope.menuresult[number-1].number = number-1;
             $scope.menuresult[number].number = number;
-            var dataobj = {
-                method: 'POST',
-                url: '/mydb?dbname=menu&type=modifyall',
-                data: $scope.menuresult
-            };
-            $http(dataobj).then(function(response){
-                getDb($http,"menu","all",function(result){
-                    $scope.menuresult = result;
-                    console.log(dataobj.method,dataobj.url,"success");
-                });
-            },function(response){
-                console.log(dataobj.method,dataobj.url,"error");
-            });
+
+            setDb($http,"menu","modifyall",$scope.menuresult,function(){
+                    getDb($http,"menu","all",function(result){
+                        $scope.menuresult = result;
+                    });
+                }
+            );
         }
     };
 
-    //dwon button//
+    //down button//
     $scope.addNumber = function(number){
         console.log("addNumber :"+number);
         if( number == ($scope.menuresult.length-1) ){
@@ -126,19 +90,13 @@ app.controller('adminCtrl', function($scope, $http) {
             $scope.menuresult[number] = tmpobj;
             $scope.menuresult[number+1].number = number+1;
             $scope.menuresult[number].number = number;
-            var dataobj = {
-                method: 'POST',
-                url: '/mydb?dbname=menu&type=modifyall',
-                data: $scope.menuresult
-            };
-            $http(dataobj).then(function(response){
-                getDb($http,"menu","all",function(result){
-                    $scope.menuresult = result;
-                    console.log(dataobj.method,dataobj.url,"success");
-                });
-            },function(response){
-                console.log(dataobj.method,dataobj.url,"error");
-            });
+
+            setDb($http,"menu","modifyall",$scope.menuresult,function(){
+                    getDb($http,"menu","all",function(result){
+                        $scope.menuresult = result;
+                    });
+                }
+            );
         }
     };
 
@@ -153,5 +111,29 @@ app.controller('adminCtrl', function($scope, $http) {
         $scope.businessEndHour = getOthersValue(result,'businessEndHour');
         $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
     });
+
+    var options = {
+		title: {
+			text: "Day Income"
+		},
+        animationEnabled: true,
+		data: [
+            {
+                type: "spline", //change it to line, area, column, pie, etc
+                dataPoints: [
+                    { x: 10, y: 10 },
+                    { x: 20, y: 12 },
+                    { x: 30, y: 8 },
+                    { x: 40, y: 14 },
+                    { x: 50, y: 6 },
+                    { x: 60, y: 24 },
+                    { x: 70, y: -4 },
+                    { x: 80, y: 10 }
+                ]
+            }
+		]
+	};
+
+	$("#chartContainer").CanvasJSChart(options);
 
 });

@@ -5,31 +5,17 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
 
     $scope.completeOrder = function(x){
         (x.status == 0)?x.status = 1:x.status = 0;
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=userorder&type=modifyone',
-            data: x
-        };
-        $http(dataobj).then(function(response){
-            getDbSortToday($http,"userorder","allsorttoday","time",sortType,getDbCallback);
-            console.log(dataobj.method,dataobj.url,"success");
-        },function(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+        setDb($http,"userorder","modifyone",x,function(){
+                getDbSortToday($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
     };
 
     $scope.deleteOrder = function(x){
-        var dataobj = {
-            method: 'POST',
-            url: '/mydb?dbname=userorder&type=delone',
-            data: x
-        };
-        $http(dataobj).then(function(response){
-            getDbSortToday($http,"userorder","allsorttoday","time",sortType,getDbCallback);
-            console.log(dataobj.method,dataobj.url,"success");
-        },function(response){
-            console.log(dataobj.method,dataobj.url,"error");
-        });
+        setDb($http,"userorder","delone",x,function(){
+                getDbSortToday($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
     };
 
     $scope.clickSort = function(sortTarget){

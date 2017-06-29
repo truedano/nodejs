@@ -58,21 +58,14 @@ app.controller('userCtrl', function($scope, $http) {
             },
             callback: function (result) {
                 if( result ){
-                    var d = new Date();
-                    var dataobj = {
-                        method: 'POST',
-                        url: '/mydb?dbname=userorder&type=insertone',
-                        data: {
+                    setDb($http,"userorder","insertone",
+                        {
                             tablenumber:$scope.tablenumber,
                             order:tmporder,
                             status:0
-                        }
-                    };
-                    $http(dataobj).then(function(response){
-                        console.log(dataobj.method,dataobj.url,"success");
-                    },function(response){
-                        console.log(dataobj.method,dataobj.url,"error");
-                    });
+                        },
+                        function(){}
+                    );
                 }
             }
         });

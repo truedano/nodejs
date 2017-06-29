@@ -5,10 +5,24 @@ var getDb = function(http,dbname,type,callback){
     }).then(function(response){
         console.log('Get '+dbname+' success');
         callback(response.data);
-    },function myError(response){
+    },function(response){
         console.log('Get '+dbname+' error');
     });
 };
+
+var setDb = function(http,dbname,type,postdata,callback){
+    var dataobj = {
+        method: 'POST',
+        url: '/mydb?dbname='+dbname+'&type='+type,
+        data: postdata
+    };
+    http(dataobj).then(function(response){
+        console.log(dataobj.method,dataobj.url,"success");
+        callback(response);
+    },function(response){
+        console.log(dataobj.method,dataobj.url,"error");
+    });
+}
 
 var getDbSortToday = function(http,dbname,type,sortTarget,sortType,callback){
     http({
