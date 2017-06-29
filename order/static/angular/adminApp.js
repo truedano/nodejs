@@ -113,8 +113,14 @@ app.controller('adminCtrl', function($scope, $http) {
     });
 
     getDbSort($http,"userorder","allsort","time",1,function(result){
-        var dailyChart = new Mychart("Daily Income",getDailyData(result));
+        var dailyData = getDailyData(result);
+        var dailyChart = new Mychart("Daily","Daily income",dailyData.xdata,dailyData.ydata);
         dailyChart.getChart("dailyChart");
+
+        var monthData = getMonthData(result);
+        var monthChart = new Mychart("Month","Month income",monthData.xdata,monthData.ydata);
+        monthChart.getChart("monthChart");
+
     });
 
 });

@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
     <script src="static/jquery/jquery.min.js"></script>
-    <script src="static/jquery/jquery.canvasjs.min.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/angular/angular.min.js"></script>
     <script src="static/angular/utils.js"></script>
     <script src="static/angular/adminApp.js"></script>
     <script src="static/angular/mychart.js"></script>
+    <script src="static/lib/Chart.min.js"></script>
 </head>
 <body ng-app="adminApp" ng-controller="adminCtrl">
 
@@ -101,9 +101,11 @@
     <h3>Chart</h3>
     <div class="row">
         <div class="col-sm-12" style="background-color:lavender;">
-            <div id="dailyChart" style="height: 300px; width: 100%;">
-        <div>
+            <canvas id="dailyChart"></canvas>
+            <canvas id="monthChart"></canvas>
+        </div>
     </div>
+    
 
 </div>
 
