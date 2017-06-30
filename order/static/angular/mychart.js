@@ -28,7 +28,7 @@ var Mychart = function(dataText,titleText,xdata,ydata){
 
     this.getChart = function(id){
         var ctx = document.getElementById(id).getContext("2d");
-        window.myBar = new Chart(ctx,this.infoData);
+        new Chart(ctx,this.infoData);
     };
 };
 
