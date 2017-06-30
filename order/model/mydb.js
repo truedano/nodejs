@@ -90,14 +90,14 @@ module.exports = function(){
     };
 
     this.backup = function(){
-        exec('mongodump --collection others --db mydb', function (error, stdout, stderr) {
+        exec('mongodump --db mydb', function (error, stdout, stderr) {
             console.log("backup finish");
         });
     };
 
     this.restore = function(){
-        exec('echo "db.others.drop()" | mongo mydb', function (error, stdout, stderr) {
-            exec('mongorestore --db mydb --collection others dump/mydb/others.bson', function (error, stdout, stderr) {
+        exec('echo "db.dropDatabase()" | mongo mydb', function (error, stdout, stderr) {
+            exec('mongorestore --db mydb dump/mydb', function (error, stdout, stderr) {
                 console.log("restore finish");
             });
         });
