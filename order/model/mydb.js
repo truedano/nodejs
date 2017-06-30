@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb";
+var exec = require("child_process").exec;
 
 module.exports = function(){
 
@@ -84,6 +85,20 @@ module.exports = function(){
             db.collection(tableName).find(myquery).sort([[sortTarget, sortType]]).toArray(function(err, result) {
                 callback(result);
                 db.close();
+            });
+        });
+    };
+
+    this.backup = function(){
+        exec('mongodump --collection others --db mydb', function (error, stdout, stderr) {
+            console.log("backup finish");
+        });
+    };
+
+    this.restore = function(){
+        exec('echo "db.others.drop()" | mongo mydb', function (error, stdout, stderr) {
+            exec('mongorestore --db mydb --collection others dump/mydb/others.bson', function (error, stdout, stderr) {
+                console.log("restore finish");
             });
         });
     };

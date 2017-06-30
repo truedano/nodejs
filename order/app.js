@@ -66,6 +66,16 @@ app.get("/mydb",function(req, res){
     }
 });
 
+app.get('/backup', function (req, res) {
+    mydb.backup();
+    res.send(JSON.stringify({success: true}));
+});
+
+app.get('/restore', function (req, res) {
+    mydb.restore();
+    res.send(JSON.stringify({success: true}));
+});
+
 app.post("/mydb",function(req, res){
     var dbname = req.query.dbname;
     var type = req.query.type;
