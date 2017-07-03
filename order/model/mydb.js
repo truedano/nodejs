@@ -90,16 +90,27 @@ module.exports = function(){
     };
 
     this.backup = function(callback){
-        exec('mongodump --db mydb', function (error, stdout, stderr) {
-            callback();
-        });
+        exec(
+            'mongoexport --db mydb --collection menu --out ./back/menu.json;'+
+            'mongoexport --db mydb --collection others --out ./back/others.json;'+
+            'mongoexport --db mydb --collection userorder --out ./back/userorder.json;'
+            ,function (error, stdout, stderr) {
+                callback();
+            }
+        );
     };
 
     this.restore = function(callback){
-        exec('echo "db.dropDatabase()" | mongo mydb', function (error, stdout, stderr) {
-            exec('mongorestore --db mydb dump/mydb', function (error, stdout, stderr) {
+        exec(
+            'echo "db.menu.remove()" | mongo mydb;'+
+            'mongoimport --db mydb --collection menu --file ./back/menu.json;'+
+            'echo "db.others.remove()" | mongo mydb;'+
+            'mongoimport --db mydb --collection others --file ./back/others.json;'+
+            'echo "db.userorder.remove()" | mongo mydb;'+
+            'mongoimport --db mydb --collection userorder --file ./back/userorder.json;'
+            , function (error, stdout, stderr) {
                 callback();
-            });
-        });
+            }
+        );
     };
 }
