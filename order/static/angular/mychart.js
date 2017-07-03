@@ -41,7 +41,7 @@ var getDailyData = function(result){
         chartdata.xdata.push(i+1);
         var sum = 0;
         for(j=0;j<result.length;j++){
-            if( result[j].date == i+1 && result[j].status == 1 ){
+            if( result[j].month == d.getMonth()+1 && result[j].date == i+1 && result[j].status == 1 ){
                 sum += result[j].sum;
             }
         }
@@ -51,13 +51,14 @@ var getDailyData = function(result){
 };
 
 var getMonthData = function(result){
+    var d = new Date();
     var chartdata = {xdata:[],ydata:[]};
 
     for(var i=0;i<12;i++){
         chartdata.xdata.push(i+1);
         var sum = 0;
         for(j=0;j<result.length;j++){
-            if( result[j].month == i+1 && result[j].status == 1 ){
+            if( result[j].year == d.getFullYear() && result[j].month == i+1 && result[j].status == 1 ){
                 sum += result[j].sum;
             }
         }

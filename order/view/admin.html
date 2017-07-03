@@ -20,93 +20,120 @@
         <h1>Admin <small>modify configs</small></h1>
     </div>
 
-    <h3>menu list</h3>
     <div class="row">
         <div class="col-sm-12" style="background-color:lavender;">
-            <table class="table table-striped">
-                <thead>
+            <div class="panel panel-default">
+                <div class="panel-heading">Add menu</div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>price</th>
+                            <th>descript</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" style="width:90px" class="form-control" ng-model="name"></td>
+                            <td><input type="text" style="width:60px" class="form-control" ng-model="price"></td>
+                            <td><input type="text" class="form-control" ng-model="descript"></td>
+                        </tr>
+                    </tbody>
                     <tr>
-                        <th>name</th>
-                        <th>price</th>
-                        <th>descript</th>
+                        <td><button type="button" class="btn btn-primary" ng-click="saveBtn()">save</button></td>
                     </tr>
-                </thead>
-                <tbody>
+                </table>
+                
+            </div>
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">Menu list</div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>price</th>
+                            <th>descript</th>
+                            <th>sequence</th>
+                            <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">Delall</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in menuresult">
+                            <td><input type="text" style="width:90px" class="form-control" ng-model="x.name"></td>
+                            <td><input type="text" style="width:60px" class="form-control" ng-model="x.price"></td>
+                            <td><input type="text" class="form-control" ng-model="x.descript"></td>
+                            <td>
+                                <div class="btn-group-vertical">
+                                    <button type="button" class="btn btn-success btn-sm" ng-click="reduceNumber(x.number)">▲</button>
+                                    <button type="button" class="btn btn-success btn-sm" ng-click="addNumber(x.number)">▼</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" ng-click="delOneDb(x)">Del</button>
+                                    <button type="button" class="btn btn-primary" ng-click="modifyOneDb(x)">Modify</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Others</div>
+                <table class="table table-hover">
                     <tr>
-                        <td><input type="text" style="width:90px" class="form-control" ng-model="name"></td>
-                        <td><input type="text" style="width:60px" class="form-control" ng-model="price"></td>
-                        <td><input type="text" class="form-control" ng-model="descript"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-primary" ng-click="saveBtn()">save</button>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>name</th>
-                        <th>price</th>
-                        <th>descript</th>
-                        <th>sequence</th>
-                        <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">Delall</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="x in menuresult">
-                        <td><input type="text" style="width:90px" class="form-control" ng-model="x.name"></td>
-                        <td><input type="text" style="width:60px" class="form-control" ng-model="x.price"></td>
-                        <td><input type="text" class="form-control" ng-model="x.descript"></td>
+                        <td>table counts</td>
                         <td>
-                            <div class="btn-group-vertical">
-                                <button type="button" class="btn btn-success btn-sm" ng-click="reduceNumber(x.number)">▲</button>
-                                <button type="button" class="btn btn-success btn-sm" ng-click="addNumber(x.number)">▼</button>
+                            <input type="text" class="form-control" ng-model="tableCounts">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>business time</td>
+                        <td>
+                            <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
+                            <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
+                            --
+                            <input type="number" style="width: 50px" min="0" max="23" ng-model="businessEndHour">:
+                            <input type="number" style="width: 50px" min="0" max="59" ng-model="businessEndMinute">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Backup</td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning" type="button" ng-click="backupDb()">Backup</button>
+                                </span>
+                                <input type="text" class="form-control" disabled ng-model="backupTime">
                             </div>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>Restore</td>
                         <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary" ng-click="delOneDb(x)">Del</button>
-                                <button type="button" class="btn btn-primary" ng-click="modifyOneDb(x)">Modify</button>
-                            </div>
+                            <button class="btn btn-danger" type="button" ng-click="restoreDb()">Restore</button>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary" ng-click="saveOthers()">Save</button></td>
+                        <td></td>
+                    </tr>
+                <table>
+                
+            </div>
 
-    <h3>Others</h3>
-    <div class="row">
-        <div class="col-sm-12" style="background-color:lavender;">
-            <table class="table table-hover">
-                <tr>
-                    <td>table counts</td>
-                    <td>
-                        <input type="text" class="form-control" ng-model="tableCounts">
-                    </td>
-                </tr>
-                <tr>
-                    <td>business time</td>
-                    <td>
-                        <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
-                        <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
-                        --
-                        <input type="number" style="width: 50px" min="0" max="23" ng-model="businessEndHour">:
-                        <input type="number" style="width: 50px" min="0" max="59" ng-model="businessEndMinute">
-                    </td>
-                </tr>
-            <table>
-            <button type="button" class="btn btn-primary" ng-click="saveOthers()">Save</button>
-        <div>
-    </div>
-    
-    <h3>Chart</h3>
-    <div class="row">
-        <div class="col-sm-12" style="background-color:lavender;">
-            <canvas id="dailyChart"></canvas>
-            <canvas id="monthChart"></canvas>
+            <div class="panel panel-success">
+                <div class="panel-heading">Chart</div>
+                <canvas id="dailyChart"></canvas>
+                <canvas id="monthChart"></canvas>
+            </div>
+
         </div>
     </div>
     
-
 </div>
 
 </body>

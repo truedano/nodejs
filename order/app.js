@@ -66,14 +66,18 @@ app.get("/mydb",function(req, res){
     }
 });
 
-app.get('/backup', function (req, res) {
-    mydb.backup();
-    res.send(JSON.stringify({success: true}));
+app.post('/backup', function (req, res) {
+    mydb.backup(function(){
+        console.log("backup finish");
+        res.send(JSON.stringify({success: true}));
+    });
 });
 
-app.get('/restore', function (req, res) {
-    mydb.restore();
-    res.send(JSON.stringify({success: true}));
+app.post('/restore', function (req, res) {
+    mydb.restore(function(){
+        console.log("restore finish");
+        res.send(JSON.stringify({success: true}));
+    });
 });
 
 app.post("/mydb",function(req, res){
@@ -137,7 +141,7 @@ app.post("/mydb",function(req, res){
         var myarray = req.body;
         mydb.drop(dbname,function(err, delOK){
             mydb.insertMultiple(dbname,myarray,function(){
-
+                res.send(JSON.stringify({success: true}));
             });
         });
     }else if( dbname == "userorder" ){

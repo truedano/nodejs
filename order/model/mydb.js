@@ -89,16 +89,16 @@ module.exports = function(){
         });
     };
 
-    this.backup = function(){
+    this.backup = function(callback){
         exec('mongodump --db mydb', function (error, stdout, stderr) {
-            console.log("backup finish");
+            callback();
         });
     };
 
-    this.restore = function(){
+    this.restore = function(callback){
         exec('echo "db.dropDatabase()" | mongo mydb', function (error, stdout, stderr) {
             exec('mongorestore --db mydb dump/mydb', function (error, stdout, stderr) {
-                console.log("restore finish");
+                callback();
             });
         });
     };
