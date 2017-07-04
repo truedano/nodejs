@@ -10,7 +10,7 @@ app.controller('adminCtrl', function($scope, $http) {
                 descript:$scope.descript
             },
             function(){
-                getDb($http,"menu","all",function(result){
+                getDbSort($http,"menu","all","number",1,function(result){
                     $scope.menuresult = result;
                 });
             }
@@ -19,7 +19,7 @@ app.controller('adminCtrl', function($scope, $http) {
 
     $scope.delOneDb = function(x){
         setDb($http,"menu","delone",x,function(){
-                getDb($http,"menu","all",function(result){
+                getDbSort($http,"menu","all","number",1,function(result){
                     $scope.menuresult = result;
                     
                 });
@@ -29,7 +29,7 @@ app.controller('adminCtrl', function($scope, $http) {
 
     $scope.delAllDb = function(){
         setDb($http,"menu","delall",null,function(){
-                getDb($http,"menu","all",function(result){
+                getDbSort($http,"menu","all","number",1,function(result){
                     $scope.menuresult = result; 
                 });
             }
@@ -38,7 +38,7 @@ app.controller('adminCtrl', function($scope, $http) {
 
     $scope.modifyOneDb = function(x){
         setDb($http,"menu","modifyone",x,function(){
-                getDb($http,"menu","all",function(result){
+                getDbSort($http,"menu","all","number",1,function(result){
                     $scope.menuresult = result;
                 });
             }
@@ -72,7 +72,7 @@ app.controller('adminCtrl', function($scope, $http) {
             $scope.menuresult[number].number = number;
 
             setDb($http,"menu","modifyall",$scope.menuresult,function(){
-                    getDb($http,"menu","all",function(result){
+                    getDbSort($http,"menu","all","number",1,function(result){
                         $scope.menuresult = result;
                     });
                 }
@@ -93,7 +93,7 @@ app.controller('adminCtrl', function($scope, $http) {
             $scope.menuresult[number].number = number;
 
             setDb($http,"menu","modifyall",$scope.menuresult,function(){
-                    getDb($http,"menu","all",function(result){
+                    getDbSort($http,"menu","all","number",1,function(result){
                         $scope.menuresult = result;
                     });
                 }
@@ -144,7 +144,7 @@ app.controller('adminCtrl', function($scope, $http) {
         });
     };
 
-    getDb($http,"menu","all",function(result){
+    getDbSort($http,"menu","all","number",1,function(result){
         $scope.menuresult = result;
     });
 
