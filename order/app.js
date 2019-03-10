@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require("path");
-var port = 3000;
+var port = 3001;
 var mydbClass = require("./model/mydb.js");
 var mydb = new mydbClass();
 var bodyParser = require("body-parser");
