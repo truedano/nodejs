@@ -1,6 +1,9 @@
 var app = angular.module('userApp', []);
 
-app.controller('userCtrl', function($scope, $http) {
+app.controller('userCtrl', function($scope, $http, $location) {
+    var sortType = -1;
+    var port = location.port;
+
     $scope.sendOrder = function(){
         if( typeof $scope.tablenumber == 'undefined' ){
             bootbox.alert({
@@ -64,7 +67,9 @@ app.controller('userCtrl', function($scope, $http) {
                             order:tmporder,
                             status:0
                         },
-                        function(){}
+                        function(){
+                            getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+                        }
                     );
                 }
             }
@@ -97,5 +102,22 @@ app.controller('userCtrl', function($scope, $http) {
         for(var i=0;i<tableCounts;i++){
             $scope.tableCountsShow.push(i+1);
         }
+    });
+
+    var getDbCallback = function(result){
+        $scope.userorderresult = result;
+    };
+
+    getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+
+    var socket = io.connect('http://'+$location.host()+':'+port);
+    socket.on('connect', function(data) {
+
+    });
+    socket.on('userorder_complete',function(){
+        getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+    });
+    socket.on('userorder_delete',function(){
+        getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
     });
 });

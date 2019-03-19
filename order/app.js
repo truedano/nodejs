@@ -182,6 +182,7 @@ app.post("/mydb",function(req, res){
                 sum : req.body.sum
             };
             mydb.update(dbname,myquery,newvalues,function(err, obj){
+                io.emit("userorder_complete","userorder_complete");
                 res.send(JSON.stringify({success: true}));
             });
         }else if( type == "delone" ){
@@ -189,6 +190,7 @@ app.post("/mydb",function(req, res){
                 time: req.body.time
             };
             mydb.remove(dbname,myquery,function(err, obj){
+                io.emit("userorder_delete","userorder_delete");
                 res.send(JSON.stringify({success: true}));
             });
         }

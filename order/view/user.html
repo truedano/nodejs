@@ -9,6 +9,7 @@
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/angular/angular.min.js"></script>
     <script src="static/bootstrap/js/bootbox.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="static/angular/utils.js"></script>
     <script src="static/angular/userApp.js"></script>
 </head>
@@ -58,6 +59,45 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn-primary" ng-click="sendOrder()">Send Order</button>
+        </div>
+
+        <div class="col-sm-12" style="background-color:rgb(82, 163, 184);">
+            <div class="col-sm-4">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <span class="label label-default">order status</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>time</th>
+                        <th>tablenumber</th>
+                        <th>order</th>
+                        <th>status</th>
+                        <th>sum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in userorderresult" ng-if="x.tablenumber==tablenumber">
+                        <td>{{ x.ftime }}</td>
+                        <td>{{ x.tablenumber }}</td>
+                        <td>
+                            <table class="table">
+                                <tr ng-repeat="y in x.order">
+                                    <td>{{ y.name }}</td>
+                                    <td>{{ y.price }} X {{ y.count }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>{{ x.status }}</td>
+                        <td>{{ x.sum }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
