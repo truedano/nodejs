@@ -2,6 +2,7 @@ var app = angular.module('sellerApp', []);
 
 app.controller('sellerCtrl', function($scope, $http, $location) {
     var sortType = -1;
+    var port = location.port;
 
     $scope.completeOrder = function(x){
         (x.status == 0)?x.status = 1:x.status = 0;
@@ -29,7 +30,7 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
 
     getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
 
-    var socket = io.connect('http://'+$location.host()+':3000');
+    var socket = io.connect('http://'+$location.host()+':'+port);
     socket.on('connect', function(data) {
 
     });
