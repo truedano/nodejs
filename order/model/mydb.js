@@ -2,9 +2,14 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb";
 var exec = require("child_process").exec;
 
-module.exports = function(){
+//dropbox
+var fetch = require('isomorphic-fetch'); // or another library of choice.
+var Dropbox = require('dropbox').Dropbox;
+var dropboxAccessToken;
+var fs = require('fs');
 
-    this.findAll = function(tableName,callback){
+module.exports = function(){
+    var findAll = function(tableName,callback){
         MongoClient.connect(url,function(err,db){
             db.collection(tableName).find({}).toArray(function(err, result) {
                 callback(result);
@@ -12,6 +17,15 @@ module.exports = function(){
             });
         });
     };
+    var getOthersValue = function(result,name){
+        for(var i=0;i<result.length;i++){
+            if( result[i].name == name ){
+                return result[i].value;
+            }
+        }
+    };
+
+    this.findAll = findAll;
 
     this.findOne = function(tableName,myquery,callback){
         MongoClient.connect(url,function(err,db){
@@ -93,9 +107,29 @@ module.exports = function(){
         exec(
             'mongoexport --db mydb --collection menu --out ./back/menu.json;'+
             'mongoexport --db mydb --collection others --out ./back/others.json;'+
-            'mongoexport --db mydb --collection userorder --out ./back/userorder.json;'
+            'mongoexport --db mydb --collection userorder --out ./back/userorder.json;'+
+            'tar czvf back.tgz back;'
             ,function (error, stdout, stderr) {
                 callback();
+                findAll('others',function(result){
+                    dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
+                    console.log("dropboxAccessToken="+dropboxAccessToken);
+                    var dbx = new Dropbox({ accessToken: dropboxAccessToken, fetch: fetch });
+                    
+                    fs.open('back.tgz', 'r', function (err, file) {
+                        if (err) throw err;
+                        console.log('File is opened in read mode.');
+                        dbx.filesUpload({path: '/' + file.name, contents: file})
+                        .then(function (response) {
+                            console.log('dropbox log '+response)
+                        })
+                        .catch(function (error) {
+                            console.error('dropbox error', error)
+                        })
+                    }); 
+                    
+                });
+                
             }
         );
     };
