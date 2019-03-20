@@ -54,6 +54,7 @@ app.controller('adminCtrl', function($scope, $http) {
                 {name:'businessEndHour',value:$scope.businessEndHour},
                 {name:'businessEndMinute',value:$scope.businessEndMinute},
                 {name:'backupTime',value:$scope.backupTime},
+                {name:'dropboxAccessToken',value:$scope.dropboxAccessToken},
             ],
             function(){}
         );
@@ -109,7 +110,8 @@ app.controller('adminCtrl', function($scope, $http) {
                 {name:'businessStartMinute',value:$scope.businessStartMinute},
                 {name:'businessEndHour',value:$scope.businessEndHour},
                 {name:'businessEndMinute',value:$scope.businessEndMinute},
-                {name:'backupTime',value:new Date().toString()}
+                {name:'backupTime',value:new Date().toString()},
+                {name:'dropboxAccessToken',value:$scope.dropboxAccessToken},
             ],
             function(){
                 $http({
@@ -124,6 +126,7 @@ app.controller('adminCtrl', function($scope, $http) {
                         $scope.businessEndHour = getOthersValue(result,'businessEndHour');
                         $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
                         $scope.backupTime = getOthersValue(result,'backupTime');
+                        $scope.dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
                     });
                 },function(response){
                     console.log("get /backup error");
@@ -155,6 +158,7 @@ app.controller('adminCtrl', function($scope, $http) {
         $scope.businessEndHour = getOthersValue(result,'businessEndHour');
         $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
         $scope.backupTime = getOthersValue(result,'backupTime');
+        $scope.dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
     });
 
     getDbSort($http,"userorder","allsort","time",1,function(result){
