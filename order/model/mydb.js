@@ -113,20 +113,21 @@ module.exports = function(){
                 callback();
                 findAll('others',function(result){
                     dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
-                    console.log("dropboxAccessToken="+dropboxAccessToken);
+                    //console.log("dropboxAccessToken="+dropboxAccessToken);
                     var dbx = new Dropbox({ accessToken: dropboxAccessToken, fetch: fetch });
                     
-                    fs.open('back.tgz', 'r', function (err, file) {
-                        if (err) throw err;
-                        console.log('File is opened in read mode.');
-                        dbx.filesUpload({path: '/' + file.name, contents: file})
+                    fs.readFile('back.tgz', function (err, contents) {
+                        if (err) {
+                            //console.log('Error: ', err);
+                        }
+                        dbx.filesUpload({ path: '/back.tgz', contents: contents })
                         .then(function (response) {
-                            console.log('dropbox log '+response)
+                            //console.log(response);
                         })
-                        .catch(function (error) {
-                            console.error('dropbox error', error)
-                        })
-                    }); 
+                        .catch(function (err) {
+                            //console.log(err);
+                        });
+                    });
                     
                 });
                 
