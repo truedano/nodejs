@@ -27,8 +27,8 @@
                     <tr>
                         <td>
                             <span class="label label-default">table number</span>
-                            <select ng-model="tablenumber">
-                                <option ng-repeat="option in tableCountsShow" ng-value="option">{{option}}</option>
+                            <select ng-disabled="tablenumber != ''" [ngStyle]="{'background-color': color}">
+                                <option ng-repeat="option in tableCountsShow" ng-value="option" ng-selected="option==tablenumber">{{option}}</option>
                             </select>
                         </td>
                     </tr>

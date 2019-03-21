@@ -3,6 +3,9 @@ var app = angular.module('userApp', []);
 app.controller('userCtrl', function($scope, $http, $location) {
     var sortType = -1;
     var port = location.port;
+    var path_tablenumber = getPathParm('tablenumber');
+
+    $scope.tablenumber = path_tablenumber;
 
     $scope.sendOrder = function(){
         if( typeof $scope.tablenumber == 'undefined' ){

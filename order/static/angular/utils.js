@@ -57,3 +57,20 @@ var resultSum = function(result){
 var formatTime = function(d){
     return d.getMonth()+1+"/"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+d.getMilliseconds();
 };
+
+var getPathParm = function(item){
+    var url = location.href;
+    var ret = "";
+
+    if(url.indexOf('?')!=-1)
+    {
+        var ary = url.split('?')[1].split('&');
+
+        for(i=0;i<=ary.length-1;i++)
+        {
+            if(ary[i].split('=')[0] == item)
+                ret = ary[i].split('=')[1];
+        }
+    }
+    return ret;
+};
