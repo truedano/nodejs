@@ -5,7 +5,10 @@ app.controller('userCtrl', function($scope, $http, $location) {
     var port = location.port;
     var path_tablenumber = getPathParm('tablenumber');
 
-    $scope.tablenumber = path_tablenumber;
+    if( path_tablenumber != '' )
+        $scope.tablenumber = path_tablenumber;
+    else
+        $scope.tablenumber = undefined;
 
     $scope.sendOrder = function(){
         if( typeof $scope.tablenumber == 'undefined' ){
