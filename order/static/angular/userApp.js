@@ -87,14 +87,18 @@ app.controller('userCtrl', function($scope, $http, $location) {
             x.count=1;
         }else{
             x.count++;
+            if( x.count > 10 )
+                x.count = 10;
         }
     };
 
     $scope.reduceCount = function(x){
         if( typeof x.count == 'undefined' || x.count == 1 ){
-            x.count=1;
+            x.count=0;
         }else{
             x.count--;
+            if( x.count < 0 )
+                x.count = 0;
         }
     };
 
