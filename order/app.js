@@ -66,6 +66,11 @@ app.get("/mydb",function(req, res){
     }
 });
 
+app.get('/exportDb', function(req, res){
+    var file = __dirname + '/back.tgz';
+    res.download(file);
+});
+
 app.post('/backup', function (req, res) {
     mydb.backup(function(){
         console.log("backup finish");
