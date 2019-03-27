@@ -66,6 +66,11 @@ app.get("/mydb",function(req, res){
     }
 });
 
+app.get('/exportDb', function(req, res){
+    var file = __dirname + '/back.tgz';
+    res.download(file);
+});
+
 app.post('/backup', function (req, res) {
     mydb.backup(function(){
         console.log("backup finish");
@@ -76,6 +81,13 @@ app.post('/backup', function (req, res) {
 app.post('/restore', function (req, res) {
     mydb.restore(function(){
         console.log("restore finish");
+        res.send(JSON.stringify({success: true}));
+    });
+});
+
+app.post('/restoreFromDropbox', function (req, res) {
+    mydb.restoreFromDropbox(function(){
+        console.log("restoreFromDropbox finish");
         res.send(JSON.stringify({success: true}));
     });
 });

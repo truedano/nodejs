@@ -1,6 +1,7 @@
 var app = angular.module('adminApp', []);
 
-app.controller('adminCtrl', function($scope, $http) {
+app.controller('adminCtrl', function($scope, $http, $window) {
+
     $scope.saveBtn = function(){
         setDb($http,"menu","insertone",
             {
@@ -135,6 +136,10 @@ app.controller('adminCtrl', function($scope, $http) {
         );
     };
 
+    $scope.exportDb = function(){
+        $window.open("/exportDb", "_blank")
+    };
+
     $scope.restoreDb = function(){
         $http({
             method: 'POST',
@@ -144,6 +149,18 @@ app.controller('adminCtrl', function($scope, $http) {
             location.reload();
         },function(response){
             console.log("get /restore error");
+        });
+    };
+
+    $scope.restoreFromDropbox = function(){
+        $http({
+            method: 'POST',
+            url: '/restoreFromDropbox'
+        }).then(function(response){
+            console.log("get /restoreFromDropbox success");
+            location.reload();
+        },function(response){
+            console.log("get /restoreFromDropbox error");
         });
     };
 
