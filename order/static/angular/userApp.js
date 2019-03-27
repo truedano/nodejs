@@ -121,6 +121,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
 
     getDb($http,"others","all",function(result){
         $scope.tableCountsShow = [];
+
+        $scope.tableCountsShow.push("Tackout");
         var tableCounts = getOthersValue(result,'tableCounts');
         for(var i=0;i<tableCounts;i++){
             $scope.tableCountsShow.push(i+1);
