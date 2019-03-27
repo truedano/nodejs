@@ -152,6 +152,18 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         });
     };
 
+    $scope.restoreFromDropbox = function(){
+        $http({
+            method: 'POST',
+            url: '/restoreFromDropbox'
+        }).then(function(response){
+            console.log("get /restoreFromDropbox success");
+            location.reload();
+        },function(response){
+            console.log("get /restoreFromDropbox error");
+        });
+    };
+
     getDbSort($http,"menu","all","number",1,function(result){
         $scope.menuresult = result;
     });

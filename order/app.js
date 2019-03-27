@@ -85,6 +85,13 @@ app.post('/restore', function (req, res) {
     });
 });
 
+app.post('/restoreFromDropbox', function (req, res) {
+    mydb.restoreFromDropbox(function(){
+        console.log("restoreFromDropbox finish");
+        res.send(JSON.stringify({success: true}));
+    });
+});
+
 app.post("/mydb",function(req, res){
     var dbname = req.query.dbname;
     var type = req.query.type;

@@ -142,4 +142,29 @@ module.exports = function(){
             }
         );
     };
+
+    this.restoreFromDropbox = function(callback){
+        findAll('others',function(result){
+            dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
+            var dbx = new Dropbox({ accessToken: dropboxAccessToken, fetch: fetch });
+
+            dbx.filesDownload({ path: '/back.tgz' })
+            .then(function (response) {
+                console.log("filesDownload ok");
+                exec(
+                    'tar zxvf back.tgz;'+
+                    'mongo mydb --eval "db.others.drop()";'+
+                    'mongo mydb --eval "db.menu.drop()";'+
+                    'mongo mydb --eval "db.userorder.drop()";'+
+                    'mongorestore -h 127.0.0.1 -d mydb --directoryperdb ./back/mydb/;'
+                    , function (error, stdout, stderr) {
+                        callback();
+                    }
+                );
+            })
+            .catch(function (err) {
+                console.log("filesDownload err");
+            });
+        });
+    };
 }
