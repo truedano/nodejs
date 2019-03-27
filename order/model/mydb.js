@@ -105,9 +105,7 @@ module.exports = function(){
 
     this.backup = function(callback){
         exec(
-            'mongoexport --db mydb --collection menu --out ./back/menu.json;'+
-            'mongoexport --db mydb --collection others --out ./back/others.json;'+
-            'mongoexport --db mydb --collection userorder --out ./back/userorder.json;'+
+            'mongodump -h 127.0.0.1 -d mydb -o ./back;'+
             'tar czvf back.tgz back;'
             ,function (error, stdout, stderr) {
                 callback();
@@ -135,12 +133,10 @@ module.exports = function(){
 
     this.restore = function(callback){
         exec(
-            'echo "db.menu.remove()" | mongo mydb;'+
-            'mongoimport --db mydb --collection menu --file ./back/menu.json;'+
-            'echo "db.others.remove()" | mongo mydb;'+
-            'mongoimport --db mydb --collection others --file ./back/others.json;'+
-            'echo "db.userorder.remove()" | mongo mydb;'+
-            'mongoimport --db mydb --collection userorder --file ./back/userorder.json;'
+            'mongo mydb --eval "db.others.drop()";'+
+            'mongo mydb --eval "db.menu.drop()";'+
+            'mongo mydb --eval "db.userorder.drop()";'+
+            'mongorestore -h 127.0.0.1 -d mydb --directoryperdb ./back/mydb/;'
             , function (error, stdout, stderr) {
                 callback();
             }
