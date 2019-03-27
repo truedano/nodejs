@@ -27,7 +27,7 @@
                     <tr>
                         <td>
                             <span class="label label-default">table number</span>
-                            <select ng-model="tablenumber" ng-disabled="tablenumber != undefined">
+                            <select ng-model="tablenumber" ng-disabled="tablenumber != undefined && selectTablenumberFlag == 0" ng-selected="selectTablenumber()">
                                 <option ng-repeat="option in tableCountsShow" ng-selected="option==tablenumber">{{option}}</option>
                             </select>
                         </td>
@@ -75,7 +75,6 @@
                 <thead>
                     <tr>
                         <th>time</th>
-                        <th>tablenumber</th>
                         <th>order</th>
                         <th>status</th>
                         <th>sum</th>
@@ -84,7 +83,6 @@
                 <tbody>
                     <tr ng-repeat="x in userorderresult" ng-if="x.tablenumber==tablenumber">
                         <td>{{ x.ftime }}</td>
-                        <td>{{ x.tablenumber }}</td>
                         <td>
                             <table class="table">
                                 <tr ng-repeat="y in x.order">

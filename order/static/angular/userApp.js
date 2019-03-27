@@ -5,10 +5,22 @@ app.controller('userCtrl', function($scope, $http, $location) {
     var port = location.port;
     var path_tablenumber = getPathParm('tablenumber');
 
-    if( path_tablenumber != '' )
+    if( path_tablenumber != '' ){
         $scope.tablenumber = path_tablenumber;
-    else
+        $scope.selectTablenumberFlag = 0;
+    }else{
         $scope.tablenumber = undefined;
+    }
+    
+    $scope.selectTablenumber = function(){
+        if( path_tablenumber != '' ){
+            //console.log("selectTablenumberFlag=0");
+            $scope.selectTablenumberFlag = 0;
+        }else{
+            //console.log("selectTablenumberFlag=1");
+            $scope.selectTablenumberFlag = 1;
+        }
+    };
 
     $scope.sendOrder = function(){
         if( typeof $scope.tablenumber == 'undefined' ){
@@ -21,7 +33,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
             
         var cnterr=0;
         for(var i=0;i<$scope.menuresult.length;i++){
-            if( typeof $scope.menuresult[i].count == 'undefined' || $scope.menuresult[i].count == null ){
+            if( typeof $scope.menuresult[i].count == 'undefined' || $scope.menuresult[i].count == null ||
+                $scope.menuresult[i].count == 0 ){
                 cnterr++;
             }
         }
