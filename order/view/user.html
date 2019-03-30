@@ -85,10 +85,20 @@
                         <td>{{ x.ftime }}</td>
                         <td>
                             <table class="table">
-                                <tr ng-repeat="y in x.order">
-                                    <td>{{ y.name }}</td>
-                                    <td>{{ y.price }} X {{ y.count }}</td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Detal</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="y in x.order">
+                                        <td>{{ y.name }}</td>
+                                        <td>{{ y.price }} X {{ y.count }}</td>
+                                        <td>{{ y.status }}</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </td>
                         <td>{{ x.status }}</td>

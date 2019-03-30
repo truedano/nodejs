@@ -56,7 +56,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
                     var obj = {
                         name:$scope.menuresult[i].name,
                         price:$scope.menuresult[i].price,
-                        count:$scope.menuresult[i].count
+                        count:$scope.menuresult[i].count,
+                        status:0,
                     };
                     tmporder.push(obj);
                     tmpmessage += obj.name + " " + obj.price + " X " + obj.count+"<br>";

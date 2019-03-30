@@ -6,6 +6,12 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
 
     $scope.completeOrder = function(x){
         (x.status == 0)?x.status = 1:x.status = 0;
+        for(var i=0;i<x.order.length;i++){
+            if(x.status == 1)
+                x.order[i].status = 1;
+            else
+                x.order[i].status = 0;
+        }
         setDb($http,"userorder","modifyone",x,function(){
                 getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
             }
@@ -14,6 +20,26 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
 
     $scope.deleteOrder = function(x){
         setDb($http,"userorder","delone",x,function(){
+                getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
+    };
+
+    $scope.completeOrderDetal = function(x,y){
+        (y.status == 0)?y.status = 1:y.status = 0;
+
+        //check all list status
+        status_sum = 0;
+        for(var i=0;i<x.order.length;i++){
+            status_sum += parseInt(x.order[i].status);
+        }
+        if(status_sum == x.order.length){
+            x.status = 1;
+        }else{
+            x.status = 0;
+        }
+
+        setDb($http,"userorder","modifyone",x,function(){
                 getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
             }
         );
