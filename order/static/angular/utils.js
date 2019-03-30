@@ -74,3 +74,16 @@ var getPathParm = function(item){
     }
     return ret;
 };
+
+var getMultiLanguage = function(langId){
+    var lang = [
+        {
+            user : "User",
+        },
+        {
+            user : "使用者",
+        }
+    ];
+
+    return lang[langId];
+};

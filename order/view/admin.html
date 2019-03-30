@@ -17,34 +17,34 @@
 
 <div class="container-fluid">
     <div class="page-header">
-        <h1>Admin <small>modify configs</small></h1>
+        <h1>Admin <small>Modify Configs</small></h1>
     </div>
 
     <ul id="adminTab" class="nav nav-tabs">
         <li class="active">
-            <a href="#menu" data-toggle="tab">menu</a>
+            <a href="#menu" data-toggle="tab">Menu</a>
         </li>
         
-        <li><a href="#others" data-toggle="tab">others</a></li>
+        <li><a href="#others" data-toggle="tab">Others</a></li>
         <li class="dropdown">
             <a href="#" id="reportDropdown" class="dropdown-toggle" data-toggle="dropdown">
-                report
+                Report
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="reportDropdown">
-                <li><a href="#chart" tabindex="-1" data-toggle="tab">chart</a></li>
+                <li><a href="#chart" tabindex="-1" data-toggle="tab">Chart</a></li>
             </ul>
         </li>
     </ul>
     <div id="adminTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="menu">
             <div class="panel panel-default">
-                <div class="panel-heading">Add menu</div>
+                <div class="panel-heading">Add Menu</div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>name</th>
-                            <th>price</th>
-                            <th>descript</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Descript</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,22 +55,22 @@
                         </tr>
                     </tbody>
                     <tr>
-                        <td><button type="button" class="btn btn-primary" ng-click="saveBtn()">save</button></td>
+                        <td><button type="button" class="btn btn-primary" ng-click="saveBtn()">Save</button></td>
                     </tr>
                 </table>
                 
             </div>
             
             <div class="panel panel-default">
-                <div class="panel-heading">Menu list</div>
+                <div class="panel-heading">Menu List</div>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>name</th>
-                            <th>price</th>
-                            <th>descript</th>
-                            <th>sequence</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Descript</th>
+                            <th>Sequence</th>
                             <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">Delall</button></th>
                         </tr>
                     </thead>
@@ -108,13 +108,13 @@
                 <div class="panel-heading">Others</div>
                 <table class="table table-hover">
                     <tr>
-                        <td>table counts</td>
+                        <td>Table Counts</td>
                         <td>
                             <input type="text" class="form-control" ng-model="tableCounts">
                         </td>
                     </tr>
                     <tr>
-                        <td>business time</td>
+                        <td>Business Time</td>
                         <td>
                             <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
                             <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
@@ -147,9 +147,18 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Dropbox Access token</td>
+                        <td>Dropbox Access Token</td>
                         <td>
                             <input type="text" class="form-control" ng-model="dropboxAccessToken">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Multi Language</td>
+                        <td>
+                            <select ng-model="multiLanguage">
+                                <option value=0 ng-selected="multiLanguage==0">English</option>
+                                <option value=1 ng-selected="multiLanguage==1">Chinese</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>

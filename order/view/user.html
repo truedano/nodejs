@@ -17,7 +17,7 @@
 
 <div class="container-fluid">
     <div class="page-header">
-        <h1>User <small></small></h1>
+        <h1>{{ml.user}} <small></small></h1>
     </div>
     <div class="row">
         
@@ -26,7 +26,7 @@
                 <table class="table">
                     <tr>
                         <td>
-                            <span class="label label-default">table number</span>
+                            <span class="label label-default">Table Number</span>
                             <select ng-model="tablenumber" ng-disabled="tablenumber != undefined && selectTablenumberFlag == 0" ng-selected="selectTablenumber()">
                                 <option ng-repeat="option in tableCountsShow" ng-selected="option==tablenumber">{{option}}</option>
                             </select>
@@ -37,9 +37,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>name</th>
-                        <th>price</th>
-                        <th>count</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Count</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +66,7 @@
                 <table class="table">
                     <tr>
                         <td>
-                            <span class="label label-default">order status</span>
+                            <span class="label label-default">Order Status</span>
                         </td>
                     </tr>
                 </table>
@@ -74,10 +74,10 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>time</th>
-                        <th>order</th>
-                        <th>status</th>
-                        <th>sum</th>
+                        <th>Time</th>
+                        <th>Order</th>
+                        <th>Status</th>
+                        <th>Sum</th>
                     </tr>
                 </thead>
                 <tbody>

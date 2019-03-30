@@ -128,6 +128,9 @@ app.controller('userCtrl', function($scope, $http, $location) {
         for(var i=0;i<tableCounts;i++){
             $scope.tableCountsShow.push(i+1);
         }
+
+        //Multi language
+        $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
     });
 
     var getDbCallback = function(result){

@@ -56,6 +56,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
                 {name:'businessEndMinute',value:$scope.businessEndMinute},
                 {name:'backupTime',value:$scope.backupTime},
                 {name:'dropboxAccessToken',value:$scope.dropboxAccessToken},
+                {name:'multiLanguage',value:$scope.multiLanguage},
             ],
             function(){}
         );
@@ -176,6 +177,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
         $scope.backupTime = getOthersValue(result,'backupTime');
         $scope.dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
+        $scope.multiLanguage = getOthersValue(result,'multiLanguage');
     });
 
     getDbSort($http,"userorder","allsort","time",1,function(result){
