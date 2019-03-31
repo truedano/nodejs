@@ -34,20 +34,20 @@
 
 <div class="container-fluid">
     <div class="page-header">
-        <h1>Seller <small></small></h1>
+        <h1>{{ml.seller}} <small></small></h1>
     </div>
     <div class="row">
-        <h3>User Order</h3>
+        <h3>{{ml.userOrder}}</h3>
         <div class="col-sm-12" style="background-color:lavender;">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th ng-click="clickSort('time')" id='time'>Time</th>
-                        <th ng-click="clickSort('tablenumber')" id='tablenumber'>Table Number</th>
-                        <th>Order</th>
-                        <th ng-click="clickSort('status')" id='status'>Status</th>
-                        <th>Sum</th>
-                        <th>Action</th>
+                        <th ng-click="clickSort('time')" id='time'>{{ml.time}}</th>
+                        <th ng-click="clickSort('tablenumber')" id='tablenumber'>{{ml.tablenumber}}</th>
+                        <th>{{ml.order}}</th>
+                        <th ng-click="clickSort('status')" id='status'>{{ml.status}}</th>
+                        <th>{{ml.sum}}</th>
+                        <th>{{ml.action}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,9 +58,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Detal</th>
-                                        <th>Status</th>
+                                        <th>{{ml.name}}</th>
+                                        <th>{{ml.detal}}</th>
+                                        <th>{{ml.status}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,7 +68,7 @@
                                         <td>{{ y.name }}</td>
                                         <td>{{ y.price }} X {{ y.count }}</td>
                                         <td>{{ y.status }}</td>
-                                        <td><button type="button" class="btn btn-info btn-xs" ng-click="completeOrderDetal(x,y)">Complete</button></td>
+                                        <td><button type="button" class="btn btn-info btn-xs" ng-click="completeOrderDetal(x,y)">{{ml.complete}}</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -77,8 +77,8 @@
                         <td>{{ x.sum }}</td>
                         <td>
                             <div class="btn-group-vertical">
-                                <button type="button" class="btn btn-primary" ng-click="completeOrder(x)">Complete</button>
-                                <button type="button" class="btn btn-primary" ng-click="deleteOrder(x)">Delete</button>
+                                <button type="button" class="btn btn-primary" ng-click="completeOrder(x)">{{ml.complete}}</button>
+                                <button type="button" class="btn btn-primary" ng-click="deleteOrder(x)">{{ml.del}}</button>
                             </div>
                         </td>
                     </tr>

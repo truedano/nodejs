@@ -46,7 +46,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         );
     }
 
-    $scope.saveOthers = function(){
+    var setDbOthers = function(callback){
         setDb($http,"others",null,
             [
                 {name:'tableCounts',value:$scope.tableCounts},
@@ -58,8 +58,14 @@ app.controller('adminCtrl', function($scope, $http, $window) {
                 {name:'dropboxAccessToken',value:$scope.dropboxAccessToken},
                 {name:'multiLanguage',value:$scope.multiLanguage},
             ],
-            function(){}
+            callback
         );
+    };
+
+    $scope.saveOthers = function(){
+        setDbOthers(function(){
+            console.log('setDbOthers')
+        });
     };
 
     //up button//
@@ -104,37 +110,36 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         }
     };
 
+    var initOthers = function(result){
+        $scope.tableCounts = getOthersValue(result,'tableCounts');
+        $scope.businessStartHour = getOthersValue(result,'businessStartHour');
+        $scope.businessStartMinute = getOthersValue(result,'businessStartMinute');
+        $scope.businessEndHour = getOthersValue(result,'businessEndHour');
+        $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
+        $scope.backupTime = getOthersValue(result,'backupTime');
+        $scope.dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
+        $scope.multiLanguage = getOthersValue(result,'multiLanguage');
+        if($scope.multiLanguage == undefined || $scope.multiLanguage == NaN || $scope.multiLanguage ==''){
+            $scope.multiLanguage = 0;
+        }
+        //Multi language
+        $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
+    };
+
     $scope.backupDb = function(){
-        setDb($http,"others",null,
-            [
-                {name:'tableCounts',value:$scope.tableCounts},
-                {name:'businessStartHour',value:$scope.businessStartHour},
-                {name:'businessStartMinute',value:$scope.businessStartMinute},
-                {name:'businessEndHour',value:$scope.businessEndHour},
-                {name:'businessEndMinute',value:$scope.businessEndMinute},
-                {name:'backupTime',value:new Date().toString()},
-                {name:'dropboxAccessToken',value:$scope.dropboxAccessToken},
-            ],
-            function(){
-                $http({
-                    method: 'POST',
-                    url: '/backup'
-                }).then(function(response){
-                    console.log("get /backup success");
-                    getDb($http,"others","all",function(result){
-                        $scope.tableCounts = getOthersValue(result,'tableCounts');
-                        $scope.businessStartHour = getOthersValue(result,'businessStartHour');
-                        $scope.businessStartMinute = getOthersValue(result,'businessStartMinute');
-                        $scope.businessEndHour = getOthersValue(result,'businessEndHour');
-                        $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
-                        $scope.backupTime = getOthersValue(result,'backupTime');
-                        $scope.dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
-                    });
-                },function(response){
-                    console.log("get /backup error");
+        setDbOthers(function(){
+            $http({
+                method: 'POST',
+                url: '/backup'
+            }).then(function(response){
+                console.log("get /backup success");
+                getDb($http,"others","all",function(result){
+                    initOthers(result);
                 });
-            }
-        );
+            },function(response){
+                console.log("get /backup error");
+            });
+        });
     };
 
     $scope.exportDb = function(){
@@ -170,14 +175,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
     });
 
     getDb($http,"others","all",function(result){
-        $scope.tableCounts = getOthersValue(result,'tableCounts');
-        $scope.businessStartHour = getOthersValue(result,'businessStartHour');
-        $scope.businessStartMinute = getOthersValue(result,'businessStartMinute');
-        $scope.businessEndHour = getOthersValue(result,'businessEndHour');
-        $scope.businessEndMinute = getOthersValue(result,'businessEndMinute');
-        $scope.backupTime = getOthersValue(result,'backupTime');
-        $scope.dropboxAccessToken = getOthersValue(result,'dropboxAccessToken');
-        $scope.multiLanguage = getOthersValue(result,'multiLanguage');
+        initOthers(result);
     });
 
     getDbSort($http,"userorder","allsort","time",1,function(result){

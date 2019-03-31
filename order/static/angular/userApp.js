@@ -25,7 +25,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
     $scope.sendOrder = function(){
         if( typeof $scope.tablenumber == 'undefined' ){
             bootbox.alert({
-                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Please choice table number</div>',
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> '+$scope.ml.pleaseChoiseTablenumber+'</div>',
                 size : 'small'
             });
             return;
@@ -40,7 +40,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
         }
         if( cnterr == $scope.menuresult.length ){
             bootbox.alert({
-                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Please choice menu</div>',
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> '+$scope.ml.pleaseChoiseMenu+'</div>',
                 size : 'small'
             });
             return;
@@ -49,7 +49,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
         var tmporder = [];
         var tmpmessage = '';
         var sum = 0;
-        tmpmessage += "table number : "+$scope.tablenumber+"<br>";
+        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+"<br>";
         for(var i=0;i<$scope.menuresult.length;i++){
             try {
                 if( parseInt($scope.menuresult[i].count) > 0 ){
@@ -67,7 +67,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
                 
             }
         }
-        tmpmessage += "sum : "+sum;
+        tmpmessage += $scope.ml.sum+" : "+sum;
         bootbox.confirm({
             title: "Re-determined",
             message: tmpmessage,
@@ -123,14 +123,14 @@ app.controller('userCtrl', function($scope, $http, $location) {
     getDb($http,"others","all",function(result){
         $scope.tableCountsShow = [];
 
-        $scope.tableCountsShow.push("Tackout");
+        //Multi language
+        $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
+
+        $scope.tableCountsShow.push($scope.ml.tackout);
         var tableCounts = getOthersValue(result,'tableCounts');
         for(var i=0;i<tableCounts;i++){
             $scope.tableCountsShow.push(i+1);
         }
-
-        //Multi language
-        $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
     });
 
     var getDbCallback = function(result){

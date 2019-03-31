@@ -56,6 +56,10 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
 
     getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
 
+    getDb($http,"others","all",function(result){
+        $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
+    });
+
     var socket = io.connect('http://'+$location.host()+':'+port);
     socket.on('connect', function(data) {
 

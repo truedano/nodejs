@@ -26,7 +26,7 @@
                 <table class="table">
                     <tr>
                         <td>
-                            <span class="label label-default">Table Number</span>
+                            <span class="label label-default">{{ml.tablenumber}}</span>
                             <select ng-model="tablenumber" ng-disabled="tablenumber != undefined && selectTablenumberFlag == 0" ng-selected="selectTablenumber()">
                                 <option ng-repeat="option in tableCountsShow" ng-selected="option==tablenumber">{{option}}</option>
                             </select>
@@ -37,9 +37,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Count</th>
+                        <th>{{ml.name}}</th>
+                        <th>{{ml.price}}</th>
+                        <th>{{ml.count}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-primary" ng-click="sendOrder()">Send Order</button>
+            <button type="button" class="btn btn-primary" ng-click="sendOrder()">{{ml.sendOrder}}</button>
         </div>
 
         <div class="col-sm-12" style="background-color:rgb(82, 163, 184);">
@@ -66,7 +66,7 @@
                 <table class="table">
                     <tr>
                         <td>
-                            <span class="label label-default">Order Status</span>
+                            <span class="label label-default">{{ml.orderStatus}}</span>
                         </td>
                     </tr>
                 </table>
@@ -74,10 +74,10 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Time</th>
-                        <th>Order</th>
-                        <th>Status</th>
-                        <th>Sum</th>
+                        <th>{{ml.time}}</th>
+                        <th>{{ml.order}}</th>
+                        <th>{{ml.status}}</th>
+                        <th>{{ml.sum}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,9 +87,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Detal</th>
-                                        <th>Status</th>
+                                        <th>{{ml.name}}</th>
+                                        <th>{{ml.detal}}</th>
+                                        <th>{{ml.status}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

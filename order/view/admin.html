@@ -17,34 +17,34 @@
 
 <div class="container-fluid">
     <div class="page-header">
-        <h1>Admin <small>Modify Configs</small></h1>
+        <h1>{{ml.admin}} <small>{{ml.modifyConfigs}}</small></h1>
     </div>
 
     <ul id="adminTab" class="nav nav-tabs">
         <li class="active">
-            <a href="#menu" data-toggle="tab">Menu</a>
+            <a href="#menu" data-toggle="tab">{{ml.menu}}</a>
         </li>
         
-        <li><a href="#others" data-toggle="tab">Others</a></li>
+        <li><a href="#others" data-toggle="tab">{{ml.others}}</a></li>
         <li class="dropdown">
             <a href="#" id="reportDropdown" class="dropdown-toggle" data-toggle="dropdown">
-                Report
+                {{ml.report}}
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="reportDropdown">
-                <li><a href="#chart" tabindex="-1" data-toggle="tab">Chart</a></li>
+                <li><a href="#chart" tabindex="-1" data-toggle="tab">{{ml.chart}}</a></li>
             </ul>
         </li>
     </ul>
     <div id="adminTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="menu">
             <div class="panel panel-default">
-                <div class="panel-heading">Add Menu</div>
+                <div class="panel-heading">{{ml.addMenu}}</div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Descript</th>
+                            <th>{{ml.name}}</th>
+                            <th>{{ml.price}}</th>
+                            <th>{{ml.descript}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,23 +55,23 @@
                         </tr>
                     </tbody>
                     <tr>
-                        <td><button type="button" class="btn btn-primary" ng-click="saveBtn()">Save</button></td>
+                        <td><button type="button" class="btn btn-primary" ng-click="saveBtn()">{{ml.save}}</button></td>
                     </tr>
                 </table>
                 
             </div>
             
             <div class="panel panel-default">
-                <div class="panel-heading">Menu List</div>
+                <div class="panel-heading">{{ml.menuList}}</div>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Descript</th>
-                            <th>Sequence</th>
-                            <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">Delall</button></th>
+                            <th>{{ml.name}}</th>
+                            <th>{{ml.price}}</th>
+                            <th>{{ml.descript}}</th>
+                            <th>{{ml.sequence}}</th>
+                            <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">{{ml.delall}}</button></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,8 +87,8 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-primary" ng-click="delOneDb(x)">Del</button>
-                                    <button type="button" class="btn btn-primary" ng-click="modifyOneDb(x)">Modify</button>
+                                    <button type="button" class="btn btn-primary" ng-click="delOneDb(x)">{{ml.del}}</button>
+                                    <button type="button" class="btn btn-primary" ng-click="modifyOneDb(x)">{{ml.modify}}</button>
                                 </div>
                             </td>
                         </tr>
@@ -98,23 +98,23 @@
         </div>
         <div class="tab-pane fade" id="chart">
             <div class="panel panel-success">
-                <div class="panel-heading">Chart</div>
+                <div class="panel-heading">{{ml.chart}}</div>
                 <canvas id="dailyChart"></canvas>
                 <canvas id="monthChart"></canvas>
             </div>
         </div>
         <div class="tab-pane fade" id="others">
             <div class="panel panel-default">
-                <div class="panel-heading">Others</div>
+                <div class="panel-heading">{{ml.others}}</div>
                 <table class="table table-hover">
                     <tr>
-                        <td>Table Counts</td>
+                        <td>{{ml.tableCounts}}</td>
                         <td>
                             <input type="text" class="form-control" ng-model="tableCounts">
                         </td>
                     </tr>
                     <tr>
-                        <td>Business Time</td>
+                        <td>{{ml.businessTime}}</td>
                         <td>
                             <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
                             <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
@@ -124,45 +124,45 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Backup</td>
+                        <td>{{ml.backup}}</td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-warning" type="button" ng-click="backupDb()">Backup</button>
+                                    <button class="btn btn-warning" type="button" ng-click="backupDb()">{{ml.backup}}</button>
                                 </span>
                                 <input type="text" class="form-control" disabled ng-model="backupTime">
                             </div>
                         </td>
                         <td>
-                            <button class="btn btn-danger" type="button" ng-click="exportDb()">Export</button>
+                            <button class="btn btn-danger" type="button" ng-click="exportDb()">{{ml.export}}</button>
                         </td>
                     </tr>
                     <tr>
-                        <td>Restore</td>
+                        <td>{{ml.restore}}</td>
                         <td>
-                            <button class="btn btn-danger" type="button" ng-click="restoreDb()">Restore</button>
+                            <button class="btn btn-danger" type="button" ng-click="restoreDb()">{{ml.restore}}</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger" type="button" ng-click="restoreFromDropbox()">Restore from Dropbox</button>
+                            <button class="btn btn-danger" type="button" ng-click="restoreFromDropbox()">{{ml.restoreFromDropbox}}</button>
                         </td>
                     </tr>
                     <tr>
-                        <td>Dropbox Access Token</td>
+                        <td>{{ml.dropboxAccessToken}}</td>
                         <td>
                             <input type="text" class="form-control" ng-model="dropboxAccessToken">
                         </td>
                     </tr>
                     <tr>
-                        <td>Multi Language</td>
+                        <td>{{ml.multiLanguage}}</td>
                         <td>
                             <select ng-model="multiLanguage">
-                                <option value=0 ng-selected="multiLanguage==0">English</option>
-                                <option value=1 ng-selected="multiLanguage==1">Chinese</option>
+                                <option value=0 ng-selected="multiLanguage==0">{{ml.english}}</option>
+                                <option value=1 ng-selected="multiLanguage==1">{{ml.chinese}}</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><button type="button" class="btn btn-primary" ng-click="saveOthers()">Save</button></td>
+                        <td><button type="button" class="btn btn-primary" ng-click="saveOthers()">{{ml.save}}</button></td>
                         <td></td>
                     </tr>
                 <table>
