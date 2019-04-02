@@ -131,16 +131,20 @@ module.exports = function(){
         );
     };
 
-    this.restore = function(callback){
+    var restoreExec = function(callback){
         exec(
             'mongo mydb --eval "db.others.drop()";'+
             'mongo mydb --eval "db.menu.drop()";'+
             'mongo mydb --eval "db.userorder.drop()";'+
-            'mongorestore -h 127.0.0.1 -d mydb --directoryperdb ./back/mydb/;'
+            'mongorestore -h 127.0.0.1 -d mydb ./back/mydb/;'
             , function (error, stdout, stderr) {
                 callback();
             }
         );
+    };
+
+    this.restore = function(callback){
+        restoreExec(callback);
     };
 
     this.restoreFromDropbox = function(callback){
@@ -151,16 +155,7 @@ module.exports = function(){
             dbx.filesDownload({ path: '/back.tgz' })
             .then(function (response) {
                 console.log("filesDownload ok");
-                exec(
-                    'tar zxvf back.tgz;'+
-                    'mongo mydb --eval "db.others.drop()";'+
-                    'mongo mydb --eval "db.menu.drop()";'+
-                    'mongo mydb --eval "db.userorder.drop()";'+
-                    'mongorestore -h 127.0.0.1 -d mydb --directoryperdb ./back/mydb/;'
-                    , function (error, stdout, stderr) {
-                        callback();
-                    }
-                );
+                restoreExec(callback);
             })
             .catch(function (err) {
                 console.log("filesDownload err");
