@@ -78,6 +78,7 @@
                         <th>{{ml.order}}</th>
                         <th>{{ml.status}}</th>
                         <th>{{ml.sum}}</th>
+                        <th>{{ml.action}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,6 +91,7 @@
                                         <th>{{ml.name}}</th>
                                         <th>{{ml.detal}}</th>
                                         <th>{{ml.status}}</th>
+                                        <th>{{ml.addDel}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,12 +99,23 @@
                                         <td>{{ y.name }}</td>
                                         <td>{{ y.price }} X {{ y.count }}</td>
                                         <td>{{ y.status }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger btn-sm" ng-click="addCountDetal(x,y)" ng-disabled="y.status==1">+</button>
+                                                <button type="button" class="btn btn-danger btn-sm" ng-click="reduceCountDetal(x,y)" ng-disabled="y.status==1">-</button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </td>
                         <td>{{ x.status }}</td>
                         <td>{{ x.sum }}</td>
+                        <td>
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-warning" ng-click="modifyOrder(x)" ng-disabled="x.status == 1">{{ml.modifyOrder}}</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

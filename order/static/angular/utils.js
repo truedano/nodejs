@@ -121,6 +121,9 @@ var getMultiLanguage = function(langId){
             userOrder : "User Order",
             action : "Action",
             complete : "Complete",
+            modifyOrder : "Modify Order",
+            cannotModify : "Can not Modify",
+            addDel : "Add / Delete",
         },
         {
             user : "顧客/使用者",
@@ -166,6 +169,9 @@ var getMultiLanguage = function(langId){
             userOrder : "顧客訂單",
             action : "動作",
             complete : "完成",
+            modifyOrder : "修改訂單",
+            cannotModify : "無法修改",
+            addDel : "新增/刪除",
         }
     ];
 

@@ -96,6 +96,85 @@ app.controller('userCtrl', function($scope, $http, $location) {
         });
     };
 
+    $scope.modifyOrder = function(x){
+        for(var i=0;i<x.order.length;i++){
+            if( x.order[i].status == 1 ){
+                bootbox.alert({
+                    message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> '+$scope.ml.cannotModify+'</div>',
+                    size : 'small'
+                });
+                return;
+            }
+        }
+        if( typeof $scope.tablenumber == 'undefined' ){
+            bootbox.alert({
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> '+$scope.ml.pleaseChoiseTablenumber+'</div>',
+                size : 'small'
+            });
+            return;
+        }
+            
+        var cnterr=0;
+        for(var i=0;i<$scope.menuresult.length;i++){
+            if( typeof $scope.menuresult[i].count == 'undefined' || $scope.menuresult[i].count == null ||
+                $scope.menuresult[i].count == 0 ){
+                cnterr++;
+            }
+        }
+        if( cnterr == $scope.menuresult.length ){
+            bootbox.alert({
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> '+$scope.ml.pleaseChoiseMenu+'</div>',
+                size : 'small'
+            });
+            return;
+        }
+
+        var tmporder = [];
+        var tmpmessage = '';
+        var sum = 0;
+        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+"<br>";
+        for(var i=0;i<$scope.menuresult.length;i++){
+            try {
+                if( parseInt($scope.menuresult[i].count) > 0 ){
+                    var obj = {
+                        name:$scope.menuresult[i].name,
+                        price:$scope.menuresult[i].price,
+                        count:$scope.menuresult[i].count,
+                        status:0,
+                    };
+                    tmporder.push(obj);
+                    tmpmessage += obj.name + " " + obj.price + " X " + obj.count+"<br>";
+                    sum += parseInt(obj.price)*parseInt(obj.count);
+                }
+            } catch (error) {
+                
+            }
+        }
+        tmpmessage += $scope.ml.sum+" : "+sum;
+        bootbox.confirm({
+            title: "Re-determined",
+            message: tmpmessage,
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            },
+            callback: function (result) {
+                if( result ){
+                    x.order = tmporder;
+                    setDb($http,"userorder","modifyone",x,
+                        function(){
+                            getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+                        }
+                    );
+                }
+            }
+        });
+    };
+
     $scope.addCount = function(x){
         if( typeof x.count == 'undefined' ){
             x.count=1;
@@ -114,6 +193,44 @@ app.controller('userCtrl', function($scope, $http, $location) {
             if( x.count < 0 )
                 x.count = 0;
         }
+    };
+
+    $scope.addCountDetal = function(x,y){
+        if( typeof y.count == 'undefined' ){
+            y.count=1;
+        }else{
+            y.count++;
+            if( y.count > 10 ){
+                y.count = 10;
+                return;
+            }
+        }
+        setDb($http,"userorder","modifyone",x,function(){
+                getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
+    };
+
+    $scope.reduceCountDetal = function(x,y){
+        if( typeof y.count == 'undefined' || y.count == 1 ){
+            y.count=0;
+        }else{
+            y.count--;
+            if( y.count < 0 ){
+                y.count = 0;
+                return;
+            }
+        }
+        if(y.count == 0){
+            var index = x.order.indexOf(y);
+            if(index > -1){
+                x.order.splice(index, 1);
+            }
+        }
+        setDb($http,"userorder","modifyone",x,function(){
+                getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
     };
 
     getDb($http,"menu","all",function(result){

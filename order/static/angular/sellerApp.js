@@ -64,6 +64,9 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
     socket.on('connect', function(data) {
 
     });
+    socket.on('userorder_complete',function(){
+        getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+    });
     socket.on('userorder_insertone',function(){
         getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
     });
