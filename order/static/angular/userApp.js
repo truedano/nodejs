@@ -57,7 +57,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
                         name:$scope.menuresult[i].name,
                         price:$scope.menuresult[i].price,
                         count:$scope.menuresult[i].count,
-                        status:0,
+                        status:$scope.ml.notReady,
                     };
                     tmporder.push(obj);
                     tmpmessage += obj.name + " " + obj.price + " X " + obj.count+"<br>";
@@ -140,7 +140,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
                         name:$scope.menuresult[i].name,
                         price:$scope.menuresult[i].price,
                         count:$scope.menuresult[i].count,
-                        status:0,
+                        status:$scope.ml.notReady,
                     };
                     tmporder.push(obj);
                     tmpmessage += obj.name + " " + obj.price + " X " + obj.count+"<br>";
@@ -205,6 +205,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
                 return;
             }
         }
+        reUserOrderSum(x);
         setDb($http,"userorder","modifyone",x,function(){
                 getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
             }
@@ -227,10 +228,18 @@ app.controller('userCtrl', function($scope, $http, $location) {
                 x.order.splice(index, 1);
             }
         }
-        setDb($http,"userorder","modifyone",x,function(){
-                getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
-            }
-        );
+        reUserOrderSum(x);
+        if( x.sum == 0 ){
+            setDb($http,"userorder","delone",x,function(){
+                    getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+                }
+            ); 
+        }else{
+            setDb($http,"userorder","modifyone",x,function(){
+                    getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+                }
+            );
+        }
     };
 
     getDb($http,"menu","all",function(result){
