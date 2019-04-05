@@ -85,7 +85,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
                         {
                             tablenumber:$scope.tablenumber,
                             order:tmporder,
-                            status:0
+                            status:$scope.ml.notReady
                         },
                         function(){
                             getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);

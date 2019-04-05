@@ -101,19 +101,19 @@
                                         <td>{{ y.status }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-danger btn-sm" ng-click="addCountDetal(x,y)" ng-disabled="y.status==1">+</button>
-                                                <button type="button" class="btn btn-danger btn-sm" ng-click="reduceCountDetal(x,y)" ng-disabled="y.status==1">-</button>
+                                                <button type="button" class="btn btn-danger btn-sm" ng-click="addCountDetal(x,y)" ng-disabled="y.status==ml.complete">+</button>
+                                                <button type="button" class="btn btn-danger btn-sm" ng-click="reduceCountDetal(x,y)" ng-disabled="y.status==ml.complete">-</button>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </td>
-                        <td>{{ x.status }}</td>
+                        <td class="text-danger">{{ x.status }}</td>
                         <td>{{ x.sum }}</td>
                         <td>
                             <div class="btn-group-vertical">
-                                <button type="button" class="btn btn-warning" ng-click="modifyOrder(x)" ng-disabled="x.status == 1">{{ml.modifyOrder}}</button>
+                                <button type="button" class="btn btn-warning" ng-click="modifyOrder(x)" ng-disabled="x.status == ml.complete">{{ml.modifyOrder}}</button>
                             </div>
                         </td>
                     </tr>

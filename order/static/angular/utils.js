@@ -105,7 +105,7 @@ var getMultiLanguage = function(langId){
             menuList : "Menu List",
             sequence : "Sequence",
             delall : "Delall",
-            del : "Del",
+            del : "Delete",
             modify : "Modify",
             tableCounts : "Table Counts",
             businessTime : "Business Time",
@@ -124,6 +124,8 @@ var getMultiLanguage = function(langId){
             modifyOrder : "Modify Order",
             cannotModify : "Can not Modify",
             addDel : "Add / Delete",
+            confirm : "Confirm",
+            notReady : "Not Ready",
         },
         {
             user : "顧客/使用者",
@@ -172,6 +174,8 @@ var getMultiLanguage = function(langId){
             modifyOrder : "修改訂單",
             cannotModify : "無法修改",
             addDel : "新增/刪除",
+            confirm : "確認",
+            notReady : "未完成",
         }
     ];
 

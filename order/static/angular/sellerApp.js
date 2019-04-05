@@ -4,13 +4,25 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
     var sortType = -1;
     var port = location.port;
 
+    $scope.confirmOrder = function(x){
+        x.status = $scope.ml.confirm;
+        setDb($http,"userorder","modifyone",x,function(){
+                getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
+    };
+
     $scope.completeOrder = function(x){
-        (x.status == 0)?x.status = 1:x.status = 0;
+        if( x.status == $scope.ml.notReady || x.status == $scope.ml.confirm ){
+            x.status = $scope.ml.complete;
+        }else{
+            x.status = $scope.ml.notReady;
+        }
         for(var i=0;i<x.order.length;i++){
-            if(x.status == 1)
-                x.order[i].status = 1;
+            if(x.status == $scope.ml.complete)
+                x.order[i].status = $scope.ml.complete;
             else
-                x.order[i].status = 0;
+                x.order[i].status = $scope.ml.notReady;
         }
         setDb($http,"userorder","modifyone",x,function(){
                 getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
@@ -26,17 +38,25 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
     };
 
     $scope.completeOrderDetal = function(x,y){
-        (y.status == 0)?y.status = 1:y.status = 0;
+        //(y.status == 0)?y.status = 1:y.status = 0;
+        if( y.status == $scope.ml.notReady ){
+            y.status = $scope.ml.complete;
+        }else{
+            y.status = $scope.ml.notReady;
+        }
 
         //check all list status
         status_sum = 0;
         for(var i=0;i<x.order.length;i++){
-            status_sum += parseInt(x.order[i].status);
+            if( x.order[i].status == $scope.ml.complete ){
+                status_sum++;
+            }
         }
         if(status_sum == x.order.length){
-            x.status = 1;
+            x.status = $scope.ml.complete;
         }else{
-            x.status = 0;
+            if( x.status != $scope.ml.confirm )
+                x.status = $scope.ml.notReady;
         }
 
         setDb($http,"userorder","modifyone",x,function(){
