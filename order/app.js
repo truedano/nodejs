@@ -118,7 +118,8 @@ app.post("/mydb",function(req, res){
                 name:req.body.name,
                 price:req.body.price,
                 descript:req.body.descript,
-                time: req.body.time
+                maxCount:req.body.maxCount,
+                time: req.body.time,
             };
             mydb.update(dbname,myquery,newvalues,function(err, obj){
                 res.send(JSON.stringify({success: true}));
@@ -137,13 +138,14 @@ app.post("/mydb",function(req, res){
                 name:req.body.name,
                 price:req.body.price,
                 descript:req.body.descript,
+                maxCount:req.body.maxCount,
                 time : d.toISOString(),
                 ftime:utils.formatTime(d),
                 year : d.getFullYear(),
                 month : d.getMonth()+1,
                 date : d.getDate(),
                 hour : d.getHours(),
-                minute : d.getMinutes()
+                minute : d.getMinutes(),
             };
             mydb.insert("menu",obj,function(err,obj){
                 res.send(JSON.stringify({success: true}));

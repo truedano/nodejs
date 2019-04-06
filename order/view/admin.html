@@ -45,6 +45,7 @@
                             <th>{{ml.name}}</th>
                             <th>{{ml.price}}</th>
                             <th>{{ml.descript}}</th>
+                            <th>{{ml.maxCount}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,7 @@
                             <td><input type="text" style="width:90px" class="form-control" ng-model="name"></td>
                             <td><input type="text" style="width:60px" class="form-control" ng-model="price"></td>
                             <td><input type="text" class="form-control" ng-model="descript"></td>
+                            <td><input type="text" style="width:60px" class="form-control" ng-model="maxCount"></td>
                         </tr>
                     </tbody>
                     <tr>
@@ -70,6 +72,7 @@
                             <th>{{ml.name}}</th>
                             <th>{{ml.price}}</th>
                             <th>{{ml.descript}}</th>
+                            <th>{{ml.maxCount}}</th>
                             <th>{{ml.sequence}}</th>
                             <th><button type="button" class="btn btn-danger" ng-click="delAllDb()">{{ml.delall}}</button></th>
                         </tr>
@@ -79,6 +82,7 @@
                             <td><input type="text" style="width:90px" class="form-control" ng-model="x.name"></td>
                             <td><input type="text" style="width:60px" class="form-control" ng-model="x.price"></td>
                             <td><input type="text" class="form-control" ng-model="x.descript"></td>
+                            <td><input type="text" style="width:60px" class="form-control" ng-model="x.maxCount"></td>
                             <td>
                                 <div class="btn-group-vertical">
                                     <button type="button" class="btn btn-success btn-sm" ng-click="reduceNumber(x.number)">▲</button>

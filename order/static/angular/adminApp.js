@@ -8,7 +8,8 @@ app.controller('adminCtrl', function($scope, $http, $window) {
                 number:$scope.menuresult.length,
                 name:$scope.name,
                 price:$scope.price,
-                descript:$scope.descript
+                descript:$scope.descript,
+                maxCount:$scope.maxCount,
             },
             function(){
                 getDbSort($http,"menu","all","number",1,function(result){
@@ -172,6 +173,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
 
     getDbSort($http,"menu","all","number",1,function(result){
         $scope.menuresult = result;
+        console.log($scope.menuresult);
     });
 
     getDb($http,"others","all",function(result){

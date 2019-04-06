@@ -123,6 +123,7 @@ var getMultiLanguage = function(langId){
             addDel : "Add / Delete",
             confirm : "Confirm",
             notReady : "Not Ready",
+            maxCount : "Max Count",
         },
         {
             user : "顧客/使用者",
@@ -173,6 +174,7 @@ var getMultiLanguage = function(langId){
             addDel : "新增/刪除",
             confirm : "確認",
             notReady : "未完成",
+            maxCount : "最大數量",
         }
     ];
 
