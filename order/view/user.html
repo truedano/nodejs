@@ -15,113 +15,93 @@
 </head>
 <body ng-app="userApp" ng-controller="userCtrl">
 
-<div class="container-fluid">
-    <div class="page-header">
-        <h1>{{ml.user}} <small></small></h1>
-    </div>
-    <div class="row">
-        
-        <div class="col-sm-12" style="background-color:lavender;">
-            <div class="col-sm-4">
-                <table class="table">
-                    <tr>
-                        <td>
-                            <span class="label label-default">{{ml.tablenumber}}</span>
-                            <select ng-model="tablenumber" ng-disabled="tablenumber != undefined && selectTablenumberFlag == 0" ng-selected="selectTablenumber()">
-                                <option ng-repeat="option in tableCountsShow" ng-selected="option==tablenumber">{{option}}</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>{{ml.name}}</th>
-                        <th>{{ml.price}}</th>
-                        <th>{{ml.count}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="x in menuresult">
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.price }}</td>
-                        <td>
-                            <input type="text" style="width:60px" min=0 class="form-control" ng-model="x.count" ng-disabled="true">
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-success btn-sm" ng-click="addCount(x)">+</button>
-                                <button type="button" class="btn btn-success btn-sm" ng-click="reduceCount(x)">-</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-primary" ng-click="sendOrder()">{{ml.sendOrder}}</button>
-        </div>
-
-        <div class="col-sm-12" style="background-color:rgb(82, 163, 184);">
-            <div class="col-sm-4">
-                <table class="table">
-                    <tr>
-                        <td>
-                            <span class="label label-default">{{ml.orderStatus}}</span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>{{ml.time}}</th>
-                        <th>{{ml.order}}</th>
-                        <th>{{ml.status}}</th>
-                        <th>{{ml.sum}}</th>
-                        <th>{{ml.action}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="x in userorderresult" ng-if="x.tablenumber==tablenumber">
-                        <td>{{ x.ftime }}</td>
-                        <td>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>{{ml.name}}</th>
-                                        <th>{{ml.detal}}</th>
-                                        <th>{{ml.status}}</th>
-                                        <th>{{ml.addDel}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="y in x.order">
-                                        <td>{{ y.name }}</td>
-                                        <td>{{ y.price }} X {{ y.count }}</td>
-                                        <td>{{ y.status }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-danger btn-sm" ng-click="addCountDetal(x,y)" ng-disabled="y.status==ml.complete">+</button>
-                                                <button type="button" class="btn btn-danger btn-sm" ng-click="reduceCountDetal(x,y)" ng-disabled="y.status==ml.complete">-</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td class="text-danger">{{ x.status }}</td>
-                        <td>{{ x.sum }}</td>
-                        <td>
-                            <div class="btn-group-vertical">
-                                <button type="button" class="btn btn-warning" ng-click="modifyOrder(x)" ng-disabled="x.status == ml.complete">{{ml.modifyOrder}}</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="page-header">
+    <h1>{{ml.user}} <small></small></h1>
 </div>
+
+<h3>
+    <span class="label label-default">{{ml.tablenumber}}</span>
+    <select ng-model="tablenumber" ng-disabled="tablenumber != undefined && selectTablenumberFlag == 0" ng-selected="selectTablenumber()">
+        <option ng-repeat="option in tableCountsShow" ng-selected="option==tablenumber">{{option}}</option>
+    </select>
+</h3>
+
+<table class="table table-striped" style="background-color: lavender;">
+    <thead>
+        <tr>
+            <th>{{ml.name}}</th>
+            <th>{{ml.price}}</th>
+            <th>{{ml.count}}</th>
+            <th>{{ml.addDel}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in menuresult">
+            <td>{{ x.name }}</td>
+            <td>{{ x.price }}</td>
+            <td>
+                <input type="text" style="width:60px" min=0 class="form-control" ng-model="x.count" ng-disabled="true">
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-sm" ng-click="addCount(x)">+</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="reduceCount(x)">-</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary" ng-click="sendOrder()">{{ml.sendOrder}}</button>
+
+<h3><span class="label label-default">{{ml.orderStatus}}</span></h3>
+<table class="table table-striped" style="background-color:rgb(82, 163, 184);">
+    <thead>
+        <tr>
+            <th>{{ml.time}}</th>
+            <th>{{ml.order}}</th>
+            <th>{{ml.status}}</th>
+            <th>{{ml.sum}}</th>
+            <th>{{ml.action}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in userorderresult" ng-if="x.tablenumber==tablenumber">
+            <td>{{ x.ftime }}</td>
+            <td>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ml.name}}</th>
+                            <th>{{ml.detal}}</th>
+                            <th>{{ml.status}}</th>
+                            <th>{{ml.addDel}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="y in x.order">
+                            <td>{{ y.name }}</td>
+                            <td>{{ y.price }} X {{ y.count }}</td>
+                            <td>{{ y.status }}</td>
+                            <td>
+                                <div class="btn-group-vertical">
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="addCountDetal(x,y)" ng-disabled="y.status==ml.complete">+</button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="reduceCountDetal(x,y)" ng-disabled="y.status==ml.complete">-</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="text-danger">{{ x.status }}</td>
+            <td>{{ x.sum }}</td>
+            <td>
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-warning btn-sm" ng-click="modifyOrder(x)" ng-disabled="x.status == ml.complete">{{ml.modifyOrder}}</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
