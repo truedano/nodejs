@@ -20,6 +20,10 @@ app.controller('userCtrl', function($scope, $http, $location) {
             //console.log("selectTablenumberFlag=1");
             $scope.selectTablenumberFlag = 1;
         }
+
+        if( $scope.tablenumber == 'Tackout' ){
+            $scope.numberOfPeople = undefined;
+        }
     };
 
     $scope.sendOrder = function(){
@@ -57,8 +61,11 @@ app.controller('userCtrl', function($scope, $http, $location) {
         var tmporder = [];
         var tmpmessage = '';
         var sum = 0;
-        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+", ";
-        tmpmessage += $scope.ml.numberOfPeople+" : "+$scope.numberOfPeople+"<br>";
+        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber;
+        if( $scope.numberOfPeople != undefined ){
+            tmpmessage += ", "+$scope.ml.numberOfPeople+" : "+$scope.numberOfPeople;
+        }
+        tmpmessage += "<br>";
         for(var i=0;i<$scope.menuresult.length;i++){
             try {
                 if( parseInt($scope.menuresult[i].count) > 0 ){

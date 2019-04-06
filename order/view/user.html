@@ -26,7 +26,7 @@
     </select>
 
     <span class="label label-default">{{ml.numberOfPeople}}</span>
-    <select ng-model="numberOfPeople">
+    <select ng-model="numberOfPeople" ng-disabled="tablenumber == 'Tackout'">
         <option ng-repeat="option in numberOfPeopleShow">{{option}}</option>
     </select>
 </h3>
@@ -102,7 +102,7 @@
             <td>
                 <div class="btn-group-vertical">
                     <button type="button" class="btn btn-warning btn-sm" ng-click="modifyOrder(x)" ng-disabled="x.status == ml.complete">{{ml.modifyOrder}}</button>
-                    <button type="button" class="btn btn-warning btn-sm" ng-click="deleteOrder(x)" ng-disabled="x.status == ml.complete">{{ml.del}}</button>
+                    <button type="button" class="btn btn-warning btn-sm" ng-click="deleteOrder(x)" ng-disabled="x.status == ml.complete || x.status == ml.confirm">{{ml.del}}</button>
                 </div>
             </td>
         </tr>
