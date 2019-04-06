@@ -124,6 +124,9 @@ var getMultiLanguage = function(langId){
             confirm : "Confirm",
             notReady : "Not Ready",
             maxCount : "Max Count",
+            numberOfPeople : "Number of people",
+            pleaseChoiseNumberOfPeople : "Please choise number of people",
+            tableStatus : "Table status",
         },
         {
             user : "顧客/使用者",
@@ -175,6 +178,9 @@ var getMultiLanguage = function(langId){
             confirm : "確認",
             notReady : "未完成",
             maxCount : "最大數量",
+            numberOfPeople : "人數",
+            pleaseChoiseNumberOfPeople : "請選擇人數",
+            tableStatus : "桌面狀態",
         }
     ];
 

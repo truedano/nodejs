@@ -30,6 +30,14 @@ app.controller('userCtrl', function($scope, $http, $location) {
             });
             return;
         }
+
+        if( typeof $scope.numberOfPeople == 'undefined' && $scope.tablenumber != 'Tackout' ){
+            bootbox.alert({
+                message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> '+$scope.ml.pleaseChoiseNumberOfPeople+'</div>',
+                size : 'small'
+            });
+            return;
+        }
             
         var cnterr=0;
         for(var i=0;i<$scope.menuresult.length;i++){
@@ -49,7 +57,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
         var tmporder = [];
         var tmpmessage = '';
         var sum = 0;
-        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+"<br>";
+        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+", ";
+        tmpmessage += $scope.ml.numberOfPeople+" : "+$scope.numberOfPeople+"<br>";
         for(var i=0;i<$scope.menuresult.length;i++){
             try {
                 if( parseInt($scope.menuresult[i].count) > 0 ){
@@ -84,6 +93,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
                     setDb($http,"userorder","insertone",
                         {
                             tablenumber:$scope.tablenumber,
+                            numberOfPeople:$scope.numberOfPeople,
                             order:tmporder,
                             status:$scope.ml.notReady
                         },
@@ -132,7 +142,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
         var tmporder = [];
         var tmpmessage = '';
         var sum = 0;
-        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+"<br>";
+        tmpmessage += $scope.ml.tablenumber+" : "+$scope.tablenumber+", ";
+        tmpmessage += $scope.ml.numberOfPeople+" : "+$scope.numberOfPeople+"<br>";
         for(var i=0;i<$scope.menuresult.length;i++){
             try {
                 if( parseInt($scope.menuresult[i].count) > 0 ){
@@ -165,6 +176,7 @@ app.controller('userCtrl', function($scope, $http, $location) {
             callback: function (result) {
                 if( result ){
                     x.order = tmporder;
+                    x.numberOfPeople = $scope.numberOfPeople;
                     setDb($http,"userorder","modifyone",x,
                         function(){
                             getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
@@ -173,6 +185,13 @@ app.controller('userCtrl', function($scope, $http, $location) {
                 }
             }
         });
+    };
+
+    $scope.deleteOrder = function(x){
+        setDb($http,"userorder","delone",x,function(){
+                getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+            }
+        );
     };
 
     $scope.addCount = function(x){
@@ -248,14 +267,22 @@ app.controller('userCtrl', function($scope, $http, $location) {
 
     getDb($http,"others","all",function(result){
         $scope.tableCountsShow = [];
+        $scope.numberOfPeopleShow = [];
 
         //Multi language
         $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
 
+        //tablenumber
         $scope.tableCountsShow.push($scope.ml.tackout);
         var tableCounts = getOthersValue(result,'tableCounts');
         for(var i=0;i<tableCounts;i++){
             $scope.tableCountsShow.push(i+1);
+        }
+
+        //number of people
+        var number = getOthersValue(result,'numberOfPeople');
+        for(var i=0;i<number;i++){
+            $scope.numberOfPeopleShow.push(i+1);
         }
     });
 

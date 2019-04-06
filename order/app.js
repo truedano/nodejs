@@ -163,6 +163,7 @@ app.post("/mydb",function(req, res){
             var d = new Date();
             var obj={
                 tablenumber:req.body.tablenumber,
+                numberOfPeople:req.body.numberOfPeople,
                 order:req.body.order,
                 status:req.body.status,
                 time : d.toISOString(),
@@ -184,6 +185,7 @@ app.post("/mydb",function(req, res){
             };
             var newvalues = {
                 tablenumber:req.body.tablenumber,
+                numberOfPeople:req.body.numberOfPeople,
                 order:req.body.order,
                 status:req.body.status,
                 time : req.body.time,

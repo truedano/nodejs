@@ -24,6 +24,11 @@
     <select ng-model="tablenumber" ng-disabled="tablenumber != undefined && selectTablenumberFlag == 0" ng-selected="selectTablenumber()">
         <option ng-repeat="option in tableCountsShow" ng-selected="option==tablenumber">{{option}}</option>
     </select>
+
+    <span class="label label-default">{{ml.numberOfPeople}}</span>
+    <select ng-model="numberOfPeople">
+        <option ng-repeat="option in numberOfPeopleShow">{{option}}</option>
+    </select>
 </h3>
 
 <table class="table table-striped" style="background-color: lavender;">
@@ -97,6 +102,7 @@
             <td>
                 <div class="btn-group-vertical">
                     <button type="button" class="btn btn-warning btn-sm" ng-click="modifyOrder(x)" ng-disabled="x.status == ml.complete">{{ml.modifyOrder}}</button>
+                    <button type="button" class="btn btn-warning btn-sm" ng-click="deleteOrder(x)" ng-disabled="x.status == ml.complete">{{ml.del}}</button>
                 </div>
             </td>
         </tr>

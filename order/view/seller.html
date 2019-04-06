@@ -41,7 +41,7 @@
     <thead>
         <tr>
             <th ng-click="clickSort('time')" id='time'>{{ml.time}}</th>
-            <th ng-click="clickSort('tablenumber')" id='tablenumber'>{{ml.tablenumber}}</th>
+            <th ng-click="clickSort('tablenumber')" id='tablenumber'>{{ml.tableStatus}}</th>
             <th>{{ml.order}}</th>
             <th ng-click="clickSort('status')" id='status'>{{ml.status}}</th>
             <th>{{ml.sum}}</th>
@@ -51,7 +51,20 @@
     <tbody>
         <tr ng-repeat="x in userorderresult">
             <td>{{ x.ftime }}</td>
-            <td>{{ x.tablenumber }}</td>
+            <td>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>{{ml.tablenumber}}</td>
+                            <td>{{ x.tablenumber }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ml.numberOfPeople}}</td>
+                            <td>{{ x.numberOfPeople }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
             <td>
                 <table class="table">
                     <thead>

@@ -51,6 +51,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         setDb($http,"others",null,
             [
                 {name:'tableCounts',value:$scope.tableCounts},
+                {name:'numberOfPeople',value:$scope.numberOfPeople},
                 {name:'businessStartHour',value:$scope.businessStartHour},
                 {name:'businessStartMinute',value:$scope.businessStartMinute},
                 {name:'businessEndHour',value:$scope.businessEndHour},
@@ -113,6 +114,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
 
     var initOthers = function(result){
         $scope.tableCounts = getOthersValue(result,'tableCounts');
+        $scope.numberOfPeople = getOthersValue(result,'numberOfPeople');
         $scope.businessStartHour = getOthersValue(result,'businessStartHour');
         $scope.businessStartMinute = getOthersValue(result,'businessStartMinute');
         $scope.businessEndHour = getOthersValue(result,'businessEndHour');
