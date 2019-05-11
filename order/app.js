@@ -9,11 +9,28 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var utilsClass = require("./model/utils.js");
 var utils = new utilsClass();
+var myQRCodeClass = require("./model/myQRCode.js");
+var myQRCode = new myQRCodeClass();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //route//////////////////////////////////////////////////////////////////
+app.get('/qrcode', function (req, res) {
+    var tableCounts;
+    var ip = require("ip").address();
+    mydb.findAll('others',function(result){
+        tableCounts = utils.getOthersValue(result,'tableCounts');
+        
+        for(var i=0;i<tableCounts;i++){
+            let strRet = myQRCode.stringToQrcode('http://'+ip+':'+port+'/user?tablenumber='+i);
+            let canvas = myQRCode.draw(strRet);
+            myQRCode.ouputFile(canvas,'./view/qrcode/out_table_'+i+'.png');
+        }
+        res.send(JSON.stringify({success: true}));
+    });
+});
+
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname+'/view/index.html'));
 });

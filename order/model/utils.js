@@ -10,4 +10,12 @@ module.exports = function(){
         }
         obj.sum = sum;
     };
+
+    this.getOthersValue = function(result,name){
+        for(var i=0;i<result.length;i++){
+            if( result[i].name == name ){
+                return result[i].value;
+            }
+        }
+    };
 };
