@@ -90,4 +90,7 @@ app.controller('sellerCtrl', function($scope, $http, $location) {
     socket.on('userorder_insertone',function(){
         getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
     });
+    socket.on('userorder_delete',function(){
+        getDbSort($http,"userorder","allsorttoday","time",sortType,getDbCallback);
+    });
 });
