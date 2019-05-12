@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>qrcode</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <script src="static/jquery/jquery.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/angular/angular.min.js"></script>
+    <script src="static/angular/utils.js"></script>
+    <script src="static/angular/qrcodeApp.js"></script>
+</head>
+<body ng-app="qrcodeApp" ng-controller="qrcodeCtrl">
+    <div class="page-header">
+        <h1>{{ml.qrcode}} <small></small></h1>
+    </div>
+
+    <table class="table table-condensed" style="word-break:break-all; word-wrap:break-all;">
+        <thead>
+            <tr>
+                <th>桌號</th>
+                <th>QR code</th>
+            </tr>
+        </thead>
+        <tbody class="qrcode_show">
+        </tbody>
+    </table>
+
+</body>
+</html>

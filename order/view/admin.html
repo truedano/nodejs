@@ -172,6 +172,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>{{ml.qrcode}}</td>
+                        <td>
+                            <button class="btn btn-danger" type="button" ng-click="generateQRCode()">{{ml.generate}}</button>
+                            <button class="btn btn-default" type="button" ng-click="showQRCode()">{{ml.show}}</button>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><button type="button" class="btn btn-primary" ng-click="saveOthers()">{{ml.save}}</button></td>
                         <td></td>
                     </tr>

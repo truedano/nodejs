@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //route//////////////////////////////////////////////////////////////////
-app.get('/qrcode', function (req, res) {
+app.post('/generateQRCode', function (req, res) {
     var tableCounts;
     var ip = require("ip").address();
     mydb.findAll('others',function(result){
@@ -29,6 +29,10 @@ app.get('/qrcode', function (req, res) {
         }
         res.send(JSON.stringify({success: true}));
     });
+});
+
+app.get('/qrcode',function(req, res){
+    res.sendFile(path.join(__dirname+'/view/qrcode.html'));
 });
 
 app.get('/', function (req, res) {
@@ -235,6 +239,10 @@ app.post("/mydb",function(req, res){
 //static/////////////////////////////////////////////////////////////////
 app.use('/static', express.static(__dirname + '/static'));
 //static/////////////////////////////////////////////////////////////////
+
+//view///////////////////////////////////////////////////////////////////
+app.use('/view', express.static(__dirname + '/view'));
+//view///////////////////////////////////////////////////////////////////
 
 //socket.io//////////////////////////////////////////////////////////////
 io.on('connect',function(){

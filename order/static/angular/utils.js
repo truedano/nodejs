@@ -127,6 +127,9 @@ var getMultiLanguage = function(langId){
             numberOfPeople : "Number of people",
             pleaseChoiseNumberOfPeople : "Please choise number of people",
             tableStatus : "Table status",
+            qrcode : "QR code",
+            generate : "Generate",
+            show : "Show",
         },
         {
             user : "顧客/使用者",
@@ -181,6 +184,9 @@ var getMultiLanguage = function(langId){
             numberOfPeople : "人數",
             pleaseChoiseNumberOfPeople : "請選擇人數",
             tableStatus : "桌面狀態",
+            qrcode : "QR code",
+            generate : "產生",
+            show : "顯示",
         }
     ];
 

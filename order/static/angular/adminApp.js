@@ -173,6 +173,22 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         });
     };
 
+    $scope.generateQRCode = function(){
+        $http({
+            method: 'POST',
+            url: '/generateQRCode'
+        }).then(function(response){
+            console.log("post /generateQRCode success");
+            location.reload();
+        },function(response){
+            console.log("post /generateQRCode error");
+        });
+    };
+
+    $scope.showQRCode = function(){
+        $window.open("/qrcode", "_blank")
+    };
+
     getDbSort($http,"menu","all","number",1,function(result){
         $scope.menuresult = result;
         console.log($scope.menuresult);
