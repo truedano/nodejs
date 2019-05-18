@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require("path");
+var ip = require("ip").address();
 var port = 3001;
 var mydbClass = require("./model/mydb.js");
 var mydb = new mydbClass();
@@ -17,7 +18,6 @@ app.use(bodyParser.json());
 
 //route//////////////////////////////////////////////////////////////////
 app.get('/serverInfo',function(req, res){
-    var ip = require("ip").address();
     var res_j_data={
         ip : ip,
         port : port,
@@ -27,7 +27,6 @@ app.get('/serverInfo',function(req, res){
 
 app.post('/generateQRCode', function (req, res) {
     var tableCounts;
-    var ip = require("ip").address();
     mydb.findAll('others',function(result){
         tableCounts = utils.getOthersValue(result,'tableCounts');
         
