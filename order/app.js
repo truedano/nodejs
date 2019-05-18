@@ -16,6 +16,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //route//////////////////////////////////////////////////////////////////
+app.get('/serverInfo',function(req, res){
+    var ip = require("ip").address();
+    var res_j_data={
+        ip : ip,
+        port : port,
+    };
+    res.send(JSON.stringify(res_j_data));
+});
+
 app.post('/generateQRCode', function (req, res) {
     var tableCounts;
     var ip = require("ip").address();

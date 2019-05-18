@@ -36,6 +36,17 @@ var getDbSort = function(http,dbname,type,sortTarget,sortType,callback){
     });
 };
 
+var getServerInfo = function(http,callback){
+    http({
+        method: 'GET',
+        url: '/serverInfo'
+    }).then(function(response){
+        callback(response.data);
+    },function(response){
+        console.log('get serverInfo fail');
+    });
+};
+
 var getOthersValue = function(result,name){
     for(var i=0;i<result.length;i++){
         if( result[i].name == name ){
@@ -130,6 +141,7 @@ var getMultiLanguage = function(langId){
             qrcode : "QR code",
             generate : "Generate",
             show : "Show",
+            url : 'Url',
         },
         {
             user : "顧客/使用者",
@@ -187,6 +199,7 @@ var getMultiLanguage = function(langId){
             qrcode : "QR code",
             generate : "產生",
             show : "顯示",
+            url : '網址',
         }
     ];
 
