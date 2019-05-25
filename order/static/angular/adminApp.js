@@ -1,7 +1,8 @@
 var app = angular.module('adminApp', []);
 
 app.controller('adminCtrl', function($scope, $http, $window) {
-
+    var sortType = -1;
+    
     $scope.saveBtn = function(){
         setDb($http,"menu","insertone",
             {
@@ -196,17 +197,26 @@ app.controller('adminCtrl', function($scope, $http, $window) {
 
     getDb($http,"others","all",function(result){
         initOthers(result);
+        getDbSort($http,"userorder","allsort","time",1,function(result){
+            var dailyData = getDailyData(result);
+            var dailyChart = new Mychart("Daily("+(new Date().getMonth()+1)+")","Daily income",dailyData.xdata,dailyData.ydata);
+            dailyChart.getChart("dailyChart");
+    
+            var monthData = getMonthData(result);
+            var monthChart = new Mychart("Month("+new Date().getFullYear()+")","Month income",monthData.xdata,monthData.ydata);
+            monthChart.getChart("monthChart");
+        });
     });
 
-    getDbSort($http,"userorder","allsort","time",1,function(result){
-        var dailyData = getDailyData(result);
-        var dailyChart = new Mychart("Daily("+(new Date().getMonth()+1)+")","Daily income",dailyData.xdata,dailyData.ydata);
-        dailyChart.getChart("dailyChart");
+    var getUserorderCallback = function(result){
+        $scope.userorderresult = result;
+    };
 
-        var monthData = getMonthData(result);
-        var monthChart = new Mychart("Month("+new Date().getFullYear()+")","Month income",monthData.xdata,monthData.ydata);
-        monthChart.getChart("monthChart");
+    //list part
+    getDbSort($http,"userorder","allsort","time",sortType,getUserorderCallback);
 
-    });
-
+    $scope.clickSort = function(sortTarget){
+        sortType == -1?sortType = 1:sortType = -1;
+        getDbSort($http,"userorder","allsort",sortTarget,sortType,getUserorderCallback);
+    };
 });

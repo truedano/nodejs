@@ -41,7 +41,7 @@ var getDailyData = function(result){
         chartdata.xdata.push(i+1);
         var sum = 0;
         for(j=0;j<result.length;j++){
-            if( result[j].month == d.getMonth()+1 && result[j].date == i+1 && result[j].status == 1 ){
+            if( result[j].month == d.getMonth()+1 && result[j].date == i+1 && ( checkComplete(result[j].status) ) ){
                 sum += result[j].sum;
             }
         }
@@ -58,7 +58,7 @@ var getMonthData = function(result){
         chartdata.xdata.push(i+1);
         var sum = 0;
         for(j=0;j<result.length;j++){
-            if( result[j].year == d.getFullYear() && result[j].month == i+1 && result[j].status == 1 ){
+            if( result[j].year == d.getFullYear() && result[j].month == i+1 && ( checkComplete(result[j].status) ) ){
                 sum += result[j].sum;
             }
         }

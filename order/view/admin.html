@@ -32,6 +32,7 @@
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="reportDropdown">
                 <li><a href="#chart" tabindex="-1" data-toggle="tab">{{ml.chart}}</a></li>
+                <li><a href="#list" tabindex="-2" data-toggle="tab">{{ml.userOrder}} {{ml.list}}</a></li>
             </ul>
         </li>
     </ul>
@@ -105,6 +106,59 @@
                 <div class="panel-heading">{{ml.chart}}</div>
                 <canvas id="dailyChart"></canvas>
                 <canvas id="monthChart"></canvas>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="list">
+            <div class="panel panel-success">
+                <div class="panel-heading">{{ml.userOrder}} {{ml.list}}</div>
+                <table class="table table-striped" style="background-color:lavender;">
+                    <thead>
+                        <tr>
+                            <th ng-click="clickSort('time')" id='time'>{{ml.time}}</th>
+                            <th ng-click="clickSort('tablenumber')" id='tablenumber'>{{ml.tableStatus}}</th>
+                            <th>{{ml.order}}</th>
+                            <th ng-click="clickSort('status')" id='status'>{{ml.status}}</th>
+                            <th>{{ml.sum}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in userorderresult">
+                            <td>{{ x.ftime }}</td>
+                            <td>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ml.tablenumber}}</td>
+                                            <td>{{ x.tablenumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ml.numberOfPeople}}</td>
+                                            <td>{{ x.numberOfPeople }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ml.name}}</th>
+                                            <th>{{ml.detal}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="y in x.order">
+                                            <td>{{ y.name }}</td>
+                                            <td>{{ y.price }} X {{ y.count }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="text-danger">{{ x.status }}</td>
+                            <td>{{ x.sum }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="tab-pane fade" id="others">
