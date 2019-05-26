@@ -92,6 +92,13 @@ app.get("/mydb",function(req, res){
         mydb.findAllSortToday(dbname,sortTarget,parseInt(sortType),function(result){
             res.send(JSON.stringify(result));
         });
+    }else if( type == "allsortsomemonth" ){
+        var sortTarget = req.query.sortTarget;
+        var sortType = req.query.sortType;
+        var month = req.query.month;
+        mydb.findAllSortSomeMonth(dbname,sortTarget,parseInt(sortType),month,function(result){
+            res.send(JSON.stringify(result));
+        });
     }
 });
 

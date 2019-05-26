@@ -130,6 +130,20 @@ app.controller('adminCtrl', function($scope, $http, $window) {
         $scope.ml = getMultiLanguage(getOthersValue(result,'multiLanguage'));
     };
 
+    var initDate = function(){
+        $scope.month = "all";
+        $scope.monthCount = ["all",1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    };
+
+    $scope.choice_month = function(x){
+        $scope.month = x;
+        if( x == "all" ){
+            getDbSort($http,"userorder","allsort","time",sortType,getUserorderCallback);
+        }else{
+            getDbSortSomeMonth($http,"userorder","allsortsomemonth","time",1,$scope.month,getUserorderCallback);
+        }
+    };
+
     $scope.backupDb = function(){
         setDbOthers(function(){
             $http({
@@ -206,6 +220,7 @@ app.controller('adminCtrl', function($scope, $http, $window) {
             var monthChart = new Mychart("Month("+new Date().getFullYear()+")","Month income",monthData.xdata,monthData.ydata);
             monthChart.getChart("monthChart");
         });
+        initDate();
     });
 
     var getUserorderCallback = function(result){
@@ -217,6 +232,10 @@ app.controller('adminCtrl', function($scope, $http, $window) {
 
     $scope.clickSort = function(sortTarget){
         sortType == -1?sortType = 1:sortType = -1;
-        getDbSort($http,"userorder","allsort",sortTarget,sortType,getUserorderCallback);
+        if( $scope.month == "all" ){
+            getDbSort($http,"userorder","allsort","time",sortType,getUserorderCallback);
+        }else{
+            getDbSortSomeMonth($http,"userorder","allsortsomemonth","time",sortType,$scope.month,getUserorderCallback);
+        }
     };
 });

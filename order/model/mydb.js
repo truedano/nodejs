@@ -103,6 +103,18 @@ module.exports = function(){
         });
     };
 
+    this.findAllSortSomeMonth = function(tableName,sortTarget,sortType,input_month,callback){
+        var myquery = {
+            month: parseInt(input_month)
+        };
+        MongoClient.connect(url,function(err,db){
+            db.collection(tableName).find(myquery).sort([[sortTarget, sortType]]).toArray(function(err, result) {
+                callback(result);
+                db.close();
+            });
+        });
+    };
+
     this.backup = function(callback){
         exec(
             'mongodump -h 127.0.0.1 -d mydb -o ./back;'+

@@ -157,6 +157,18 @@ var getDbSort = function(http,dbname,type,sortTarget,sortType,callback){
     });
 };
 
+var getDbSortSomeMonth = function(http,dbname,type,sortTarget,sortType,month,callback){
+    http({
+        method: 'GET',
+        url: '/mydb?dbname='+dbname+'&type='+type+"&sortTarget="+sortTarget+"&sortType="+sortType+'&month='+month
+    }).then(function(response){
+        console.log('Get '+dbname+' success');
+        callback(response.data);
+    },function(response){
+        console.log('Get '+dbname+' error');
+    });
+};
+
 var getServerInfo = function(http,callback){
     http({
         method: 'GET',
