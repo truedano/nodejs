@@ -13,6 +13,11 @@
     <script src="static/angular/mychart.js"></script>
     <script src="static/lib/Chart.min.js"></script>
 </head>
+<style>
+#sum_header div {
+    background-color: blueviolet;
+}
+</style>
 <body ng-app="adminApp" ng-controller="adminCtrl">
 
 <div class="container-fluid">
@@ -111,15 +116,26 @@
         <div class="tab-pane fade" id="list">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            {{month}}
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li ng-repeat="x in monthCount"><a href="#" ng-click='choice_month(x)'>{{x}}</a></li>
-                        </ul>
+                    
+                    <div class="row" id="sum_header">
+                        <div class="col-sm-2" style="background-color: bisque">{{ml.month}}</div>
+                        <div class="col-sm-2" style="background-color: bisque">{{ml.sum}}</div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="selectMonthMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{month}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="selectMonthMenu">
+                                    <li ng-repeat="x in monthCount"><a href="#" ng-click='choice_month(x)'>{{x}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">{{totalsum}}</div>
+                    </div>
+                    
                 </div>
                 <table class="table table-striped" style="background-color:lavender;">
                     <thead>

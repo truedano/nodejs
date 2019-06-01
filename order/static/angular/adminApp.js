@@ -225,6 +225,11 @@ app.controller('adminCtrl', function($scope, $http, $window) {
 
     var getUserorderCallback = function(result){
         $scope.userorderresult = result;
+        $scope.totalsum = 0;
+        for(var i=0;i<$scope.userorderresult.length;i++){
+            if( checkComplete($scope.userorderresult[i].status) )
+                $scope.totalsum += $scope.userorderresult[i].sum;
+        }
     };
 
     //list part

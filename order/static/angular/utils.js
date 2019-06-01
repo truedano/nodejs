@@ -57,6 +57,7 @@ var lang = [
         show : "Show",
         url : 'Url',
         list : 'List',
+        month : 'Month'
     },
     {
         user : "顧客/使用者",
@@ -116,6 +117,7 @@ var lang = [
         show : "顯示",
         url : '網址',
         list : '清單',
+        month : '月份'
     }
 ];
 
