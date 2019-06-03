@@ -13,7 +13,7 @@
 </head>
 <body ng-app="defaultApp" ng-controller="defaultCtrl">
         <div class="panel panel-default">
-                <div class="panel-heading">{{ml.others}}</div>
+                <div class="panel-heading">{{ml.default}}</div>
                 <table class="table table-hover">
                     <tr>
                         <td>{{ml.tableCounts}}</td>
@@ -35,12 +35,6 @@
                             --
                             <input type="number" style="width: 50px" min="0" max="23" ng-model="businessEndHour">:
                             <input type="number" style="width: 50px" min="0" max="59" ng-model="businessEndMinute">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{ml.dropboxAccessToken}}</td>
-                        <td>
-                            <input type="text" class="form-control" ng-model="dropboxAccessToken">
                         </td>
                     </tr>
                     <tr>
