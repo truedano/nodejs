@@ -39,6 +39,10 @@ app.post('/generateQRCode', function (req, res) {
     });
 });
 
+app.get('/default',function(req, res){
+    res.sendFile(path.join(__dirname+'/view/default.html'));
+});
+
 app.get('/qrcode',function(req, res){
     res.sendFile(path.join(__dirname+'/view/qrcode.html'));
 });
