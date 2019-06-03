@@ -20,6 +20,10 @@ app.controller('defaultCtrl', function($scope, $http, $window) {
         );
     };
 
+    $scope.delallUserorder = function(){
+        setDb($http,"userorder","delall",null,null);
+    };
+
     $scope.saveOthers = function(){
         setDbOthers(function(){
             console.log('setDbOthers')

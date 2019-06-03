@@ -12,45 +12,50 @@
     <script src="static/angular/defaultApp.js"></script>
 </head>
 <body ng-app="defaultApp" ng-controller="defaultCtrl">
-        <div class="panel panel-default">
-                <div class="panel-heading">{{ml.default}}</div>
-                <table class="table table-hover">
-                    <tr>
-                        <td>{{ml.tableCounts}}</td>
-                        <td>
-                            <input type="text" class="form-control" ng-model="tableCounts">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{ml.numberOfPeople}}</td>
-                        <td>
-                            <input type="text" class="form-control" ng-model="numberOfPeople">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{ml.businessTime}}</td>
-                        <td>
-                            <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
-                            <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
-                            --
-                            <input type="number" style="width: 50px" min="0" max="23" ng-model="businessEndHour">:
-                            <input type="number" style="width: 50px" min="0" max="59" ng-model="businessEndMinute">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{ml.multiLanguage}}</td>
-                        <td>
-                            <select ng-model="multiLanguage">
-                                <option value=0 ng-selected="multiLanguage==0">{{ml.english}}</option>
-                                <option value=1 ng-selected="multiLanguage==1">{{ml.chinese}}</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="btn btn-primary" ng-click="saveOthers()">{{ml.save}}</button></td>
-                        <td></td>
-                    </tr>
-                <table>
-                
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ml.default}}</div>
+        <table class="table table-hover">
+            <tr>
+                <td>{{ml.tableCounts}}</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="tableCounts">
+                </td>
+            </tr>
+            <tr>
+                <td>{{ml.numberOfPeople}}</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="numberOfPeople">
+                </td>
+            </tr>
+            <tr>
+                <td>{{ml.businessTime}}</td>
+                <td>
+                    <input type="number" style="width: 50px" min="0" max="23" ng-model="businessStartHour">:
+                    <input type="number" style="width: 50px" min="0" max="59" ng-model="businessStartMinute">
+                    --
+                    <input type="number" style="width: 50px" min="0" max="23" ng-model="businessEndHour">:
+                    <input type="number" style="width: 50px" min="0" max="59" ng-model="businessEndMinute">
+                </td>
+            </tr>
+            <tr>
+                <td>{{ml.multiLanguage}}</td>
+                <td>
+                    <select ng-model="multiLanguage">
+                        <option value=0 ng-selected="multiLanguage==0">{{ml.english}}</option>
+                        <option value=1 ng-selected="multiLanguage==1">{{ml.chinese}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ml.delall}}</td>
+                <td>
+                    <button class="btn btn-danger" type="button" ng-click="delallUserorder()">{{ml.others}}</button>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-primary" ng-click="saveOthers()">{{ml.save}}</button></td>
+                <td></td>
+            </tr>
+        <table>
+    </div>
 </body>

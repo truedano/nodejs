@@ -249,6 +249,10 @@ app.post("/mydb",function(req, res){
                 io.emit("userorder_delete","userorder_delete");
                 res.send(JSON.stringify({success: true}));
             });
+        }else if( type == "delall" ){
+            mydb.drop(dbname,function(err, delOK){
+                res.send(JSON.stringify({success: true}));
+            });
         }
     }
     
