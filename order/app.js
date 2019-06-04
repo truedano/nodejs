@@ -79,7 +79,7 @@ app.get("/mydb",function(req, res){
     var dbname = req.query.dbname;
     var type = req.query.type;
 
-    console.log("get mydb","dbname="+dbname,"type="+type,"ip="+req.ip);
+    console.log("get mydb","dbname="+dbname,"type="+type,"ip="+ip);
     if( type == "all" ){
         mydb.findAll(dbname,function(result){
             res.send(JSON.stringify(result));
@@ -136,7 +136,7 @@ app.post("/mydb",function(req, res){
     var dbname = req.query.dbname;
     var type = req.query.type;
 
-    console.log("post mydb","dbname="+dbname,"type="+type,"ip="+req.ip);
+    console.log("post mydb","dbname="+dbname,"type="+type,"ip="+ip);
     if( dbname == "menu" ){
         if( type == "delall" ){
             mydb.drop(dbname,function(err, delOK){
