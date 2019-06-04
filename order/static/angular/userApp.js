@@ -201,6 +201,28 @@ app.controller('userCtrl', function($scope, $http, $location) {
         );
     };
 
+    var calTmpsum = function(){
+        var sum = 0;
+        var tmporder = [];
+        for(var i=0;i<$scope.menuresult.length;i++){
+            try {
+                if( parseInt($scope.menuresult[i].count) > 0 ){
+                    var obj = {
+                        name:$scope.menuresult[i].name,
+                        price:$scope.menuresult[i].price,
+                        count:$scope.menuresult[i].count,
+                        status:$scope.ml.notReady,
+                    };
+                    tmporder.push(obj);
+                    sum += parseInt(obj.price)*parseInt(obj.count);
+                }
+            } catch (error) {
+                
+            }
+        }
+        $scope.tmpsum = sum;
+    };
+
     $scope.addCount = function(x){
         if( typeof x.count == 'undefined' ){
             x.count=1;
@@ -209,6 +231,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
             if( x.count > 10 )
                 x.count = 10;
         }
+
+        calTmpsum();
     };
 
     $scope.reduceCount = function(x){
@@ -219,6 +243,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
             if( x.count < 0 )
                 x.count = 0;
         }
+        
+        calTmpsum();
     };
 
     $scope.addCountDetal = function(x,y){
@@ -270,6 +296,9 @@ app.controller('userCtrl', function($scope, $http, $location) {
 
     getDb($http,"menu","all",function(result){
         $scope.menuresult = result;
+        for(var i=0;i<$scope.menuresult.length;i++){
+            $scope.menuresult[i].count = 0;
+        }
     });
 
     getDb($http,"others","all",function(result){
@@ -291,6 +320,8 @@ app.controller('userCtrl', function($scope, $http, $location) {
         for(var i=0;i<number;i++){
             $scope.numberOfPeopleShow.push(i+1);
         }
+
+        $scope.tmpsum = 0;
     });
 
     var getDbCallback = function(result){

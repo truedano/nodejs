@@ -38,12 +38,13 @@
             <th>{{ml.price}}</th>
             <th>{{ml.count}}</th>
             <th>{{ml.addDel}}</th>
+            <th>{{ml.sum}}</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="x in menuresult">
             <td>{{ x.name }}</td>
-            <td>{{ x.price }}</td>
+            <td style="color:blueviolet">{{ x.price }}</td>
             <td>
                 <input type="text" style="width:60px" min=0 class="form-control" ng-model="x.count" ng-disabled="true">
             </td>
@@ -53,10 +54,12 @@
                     <button type="button" class="btn btn-success btn-sm" ng-click="reduceCount(x)">-</button>
                 </div>
             </td>
+            <td style="color:coral">{{ x.count * x.price }}</td>
         </tr>
     </tbody>
 </table>
 <button type="button" class="btn btn-primary" ng-click="sendOrder()">{{ml.sendOrder}}</button>
+<h2 style="display:inline;color:crimson">{{ml.sum}} : {{tmpsum}}</h2>
 
 <h3><span class="label label-default">{{ml.orderStatus}}</span></h3>
 <table class="table table-striped" style="background-color:rgb(82, 163, 184);">
